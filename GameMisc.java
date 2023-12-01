@@ -1,19 +1,21 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*; 
+import java.lang.*;
 
-/**
- * Write a description of class GameMisc here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class GameMisc extends Actor
 {
-    /**
-     * Act - do whatever the GameMisc wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+    public int hp;
+    public int score;
+    
+    public GameMisc(int hp, int score) {
+        
+        this.hp = hp;
+        this.score = score;
+        
+    }
+    
     public void act()
     {
-        // Add your action code here.
+        getWorld().showText("Score: " + score, 80, 10);
+        getWorld().showText("HP: " + hp + "/100", 80, 30);
     }
 }
