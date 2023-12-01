@@ -5,17 +5,21 @@ public class GameMisc extends Actor
 {
     public int hp;
     public int score;
+    public int x;
+    public int y;
     
-    public GameMisc(int hp, int score) {
+    public GameMisc(int hp, int score, int x, int y) {
         
         this.hp = hp;
         this.score = score;
+        this.x = x;
+        this.y = y;
         
     }
     
     public void act()
     {
-        getWorld().showText("Score: " + score, 80, 10);
-        getWorld().showText("HP: " + hp + "/100", 80, 30);
+        getWorld().showText("Score: " + score, x, y);
+        getWorld().showText("HP: " + hp + "/100", x, y + 20);
     }
 }

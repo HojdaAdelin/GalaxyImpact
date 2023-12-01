@@ -7,13 +7,19 @@ public class MyWorld extends World {
     private boolean gameStarted = false;
     public GreenfootSound game_start_sound;
     public MainPlayer player;
+    public GameMisc game_misc;
     
     private int enemySpawnTimer = 0;
-    private int enemySpawnDelay = 150; // Numărul de acte între apariția inamicilor
+    private int enemySpawnDelay = 120;
+    public int get_hp = 100;
+    public int get_score = 0;
+    public int x_misc = 80;
+    public int y_misc = getHeight() - 50;
 
     public MyWorld() {
         super(900, 600, 1);
         player = new MainPlayer();
+        game_misc = new GameMisc(get_hp, get_score, x_misc, y_misc);
         addObject(new Button("Play"), getWidth() / 2, getHeight() - 100);
         addObject(new Button("Exit"), getWidth() - 150, getHeight() - 100);
         addObject(new Button("Shop"), getWidth() - 750, getHeight() - 100);
@@ -53,6 +59,7 @@ public class MyWorld extends World {
             }
             game_start_sound.play();
             addObject(new MainPlayer(), getWidth() / 2, getHeight() - 100);
+            addObject(game_misc, x_misc, y_misc);
         } else if (button.getLabel().equals("Exit")) {
             System.out.println("Jocul a fost închis.");
         } else if (button.getLabel().equals("Shop")) {
