@@ -43,6 +43,11 @@ public class MyWorld extends World {
                 
             }
         }
+        if (get_hp == 0) {
+            
+            gameStarted = false;
+            Greenfoot.stop();
+        }
     }
 
     private void checkButtonClicks() {
