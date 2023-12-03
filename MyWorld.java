@@ -5,6 +5,7 @@ import greenfoot.*;
 public class MyWorld extends World {
     
     private boolean gameStarted = false;
+    public boolean check_update = false;
     public GreenfootSound game_start_sound;
     public MainPlayer player;
     public GameMisc game_misc;
@@ -19,7 +20,7 @@ public class MyWorld extends World {
     public MyWorld() {
         super(900, 600, 1);
         player = new MainPlayer();
-        game_misc = new GameMisc(get_hp, get_score, x_misc, y_misc);
+        //game_misc = new GameMisc(get_hp, get_score, x_misc, y_misc);
         addObject(new Button("Play"), getWidth() / 2, getHeight() - 100);
         addObject(new Button("Exit"), getWidth() - 150, getHeight() - 100);
         addObject(new Button("Shop"), getWidth() - 750, getHeight() - 100);
@@ -35,7 +36,12 @@ public class MyWorld extends World {
 
         if (gameStarted) {
             addNewEnemyWithTimer();
-            
+            if (check_update) {
+                
+                addObject(new GameMisc(get_hp, get_score, x_misc, y_misc), x_misc, y_misc);
+                check_update = false;
+                
+            }
         }
     }
 
@@ -59,7 +65,7 @@ public class MyWorld extends World {
             }
             game_start_sound.play();
             addObject(new MainPlayer(), getWidth() / 2, getHeight() - 100);
-            addObject(game_misc, x_misc, y_misc);
+            addObject(new GameMisc(get_hp, get_score, x_misc, y_misc), x_misc, y_misc);
         } else if (button.getLabel().equals("Exit")) {
             System.out.println("Jocul a fost închis.");
         } else if (button.getLabel().equals("Shop")) {
@@ -78,5 +84,11 @@ public class MyWorld extends World {
             // Resetăm timerul
             enemySpawnTimer = 0;
         }
+    }
+    public void decreaseHp() {
+        
+        get_hp -= 10;
+        check_update = true;
+        
     }
 }

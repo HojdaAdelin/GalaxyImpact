@@ -10,4 +10,6 @@ comment4.params=button
 comment4.target=void\ handleButtonClick(Button)
 comment5.params=
 comment5.target=void\ addNewEnemyWithTimer()
-numComments=6
+comment6.params=
+comment6.target=void\ decreaseHp()
+numComments=7
