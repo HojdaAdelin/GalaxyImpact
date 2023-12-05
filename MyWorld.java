@@ -36,6 +36,7 @@ public class MyWorld extends World {
 
         if (gameStarted) {
             addNewEnemyWithTimer();
+            
             if (check_update) {
                 
                 addObject(new GameMisc(get_hp, get_score, x_misc, y_misc), x_misc, y_misc);
@@ -50,6 +51,8 @@ public class MyWorld extends World {
         }
     }
 
+    // Menu
+    
     private void checkButtonClicks() {
         List<Button> buttons = getObjects(Button.class);
 
@@ -93,6 +96,7 @@ public class MyWorld extends World {
     public void decreaseHp() {
         
         get_hp -= 10;
+        get_score += 50;
         check_update = true;
         
     }

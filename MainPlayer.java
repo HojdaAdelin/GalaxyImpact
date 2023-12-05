@@ -22,5 +22,19 @@ public class MainPlayer extends Actor {
         if (Greenfoot.isKeyDown("S")) {
             setLocation(getX(), getY() + 5); 
         }
+        checkKeyPress();
+    }
+    private void checkKeyPress()
+    {
+        if (Greenfoot.isKeyDown("space"))
+        {
+            fireBullet();
+        }
+    }
+
+    private void fireBullet()
+    {
+        PlayerBullet bullet = new PlayerBullet();
+        getWorld().addObject(bullet, getX(), getY() - 20); // Adaugă bullet-ul deasupra player-ului
     }
 }
