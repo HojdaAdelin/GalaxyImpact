@@ -20,8 +20,13 @@ public class MainEnemy extends Actor {
         if (getY() >= getWorld().getHeight() - 1) {
             getWorld().removeObject(this);
         }
-
-        if (isTouching(MainPlayer.class)) {
+        if (isTouching(PlayerBullet.class)) {
+            
+            MyWorld myworld = (MyWorld) getWorld();
+            getWorld().removeObject(this);
+            
+        }
+        else if (isTouching(MainPlayer.class)) {
             MyWorld myworld = (MyWorld) getWorld();
             myworld.decreaseHp();
             fitt_in.play();

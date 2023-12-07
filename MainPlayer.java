@@ -2,6 +2,8 @@ import greenfoot.*;
 
 public class MainPlayer extends Actor {
     
+    public int delay = 20;
+    
     public MainPlayer() {
         GreenfootImage playerImage = new GreenfootImage("main-player.png");
         setImage(playerImage);
@@ -11,30 +13,36 @@ public class MainPlayer extends Actor {
     public void act() {
         
         if (Greenfoot.isKeyDown("A")) {
-            move(-5); 
+            move(-7); 
         }
         if (Greenfoot.isKeyDown("D")) {
-            move(5);  
+            move(7);  
         }
         if (Greenfoot.isKeyDown("W")) {
-            setLocation(getX(), getY() - 5);  
+            setLocation(getX(), getY() - 7);  
         }
         if (Greenfoot.isKeyDown("S")) {
-            setLocation(getX(), getY() + 5); 
+            setLocation(getX(), getY() + 7); 
         }
         checkKeyPress();
     }
     private void checkKeyPress()
     {
-        if (Greenfoot.isKeyDown("space"))
+        if (delay > 0) {
+            delay--;
+        }
+    
+        if (Greenfoot.isKeyDown("space") && delay == 0)
         {
             fireBullet();
+            delay = 20;  // Resetăm delay după ce am tras un glonț
         }
     }
+
 
     private void fireBullet()
     {
         PlayerBullet bullet = new PlayerBullet();
-        getWorld().addObject(bullet, getX(), getY() - 20); // Adaugă bullet-ul deasupra player-ului
+        getWorld().addObject(bullet, getX(), getY() - 30); // Adaugă bullet-ul deasupra player-ului
     }
 }

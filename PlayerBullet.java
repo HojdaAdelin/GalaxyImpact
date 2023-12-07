@@ -18,13 +18,14 @@ public class PlayerBullet extends MainPlayer
     {
         MyWorld myworld = (MyWorld) getWorld();
         setLocation(getX(), getY() - xSpeed);
-        if (getY() <= -1) {
+        if (getY() == 0) {
             getWorld().removeObject(this);
         }
-        if (isTouching(MainEnemy.class)) {
+        /*
+        else if (isTouching(MainEnemy.class)) {
             
             getWorld().removeObject(this);
             
-        }
+        }*/
     }
 }
