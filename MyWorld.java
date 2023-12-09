@@ -100,4 +100,9 @@ public class MyWorld extends World {
         check_update = true;
         
     }
+    public void increaseScore() {
+        
+        get_score += 50;
+        check_update = true;
+    }
 }
