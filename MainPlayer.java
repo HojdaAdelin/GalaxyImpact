@@ -2,7 +2,7 @@ import greenfoot.*;
 
 public class MainPlayer extends Actor {
     
-    public int delay = 20;
+    public int delay = 25;
     
     public MainPlayer() {
         GreenfootImage playerImage = new GreenfootImage("main-player.png");
@@ -35,7 +35,7 @@ public class MainPlayer extends Actor {
         if (Greenfoot.isKeyDown("space") && delay == 0)
         {
             fireBullet();
-            delay = 20;  // Resetăm delay după ce am tras un glonț
+            delay = 25;  // Resetăm delay după ce am tras un glonț
         }
     }
 

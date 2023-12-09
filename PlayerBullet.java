@@ -3,6 +3,7 @@ import greenfoot.*;
 public class PlayerBullet extends MainPlayer
 {
     public GreenfootSound fire;
+    boolean check_update = false;
     private int xSpeed = 15;
     public PlayerBullet() {
         
@@ -21,11 +22,8 @@ public class PlayerBullet extends MainPlayer
         if (getY() == 0) {
             getWorld().removeObject(this);
         }
-        /*
-        else if (isTouching(MainEnemy.class)) {
-            
-            getWorld().removeObject(this);
-            
-        }*/
+        
+        
     }
+    
 }

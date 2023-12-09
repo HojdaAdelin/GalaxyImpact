@@ -26,6 +26,7 @@ public class MainEnemy extends Actor {
             getWorld().removeObject(this);
             myworld.increaseScore();
             
+          
         }
         else if (isTouching(MainPlayer.class)) {
             MyWorld myworld = (MyWorld) getWorld();

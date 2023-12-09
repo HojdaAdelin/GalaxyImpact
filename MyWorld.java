@@ -11,7 +11,7 @@ public class MyWorld extends World {
     public GameMisc game_misc;
     
     private int enemySpawnTimer = 0;
-    private int enemySpawnDelay = 120;
+    private int enemySpawnDelay = 60;
     public int get_hp = 100;
     public int get_score = 0;
     public int x_misc = 80;
