@@ -44,7 +44,7 @@ public class MyWorld extends World {
                 
             }
         }
-        if (get_hp == 0) {
+        if (get_hp <= 0) {
             
             gameStarted = false;
             Greenfoot.stop();
@@ -97,6 +97,12 @@ public class MyWorld extends World {
         
         get_hp -= 10;
         get_score += 50;
+        check_update = true;
+        
+    }
+    public void minHp() {
+        
+        get_hp -= 10;
         check_update = true;
         
     }

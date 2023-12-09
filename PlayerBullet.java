@@ -3,7 +3,6 @@ import greenfoot.*;
 public class PlayerBullet extends MainPlayer
 {
     public GreenfootSound fire;
-    boolean check_update = false;
     private int xSpeed = 15;
     public PlayerBullet() {
         
