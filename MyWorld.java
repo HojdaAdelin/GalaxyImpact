@@ -7,6 +7,7 @@ public class MyWorld extends World {
     private boolean gameStarted = false;
     public boolean check_update = false;
     public GreenfootSound game_start_sound;
+    public GreenfootSound game_over_sound;
     public MainPlayer player;
     public GameMisc game_misc;
     
@@ -25,6 +26,7 @@ public class MyWorld extends World {
         addObject(new Button("Exit"), getWidth() - 150, getHeight() - 100);
         addObject(new Button("Shop"), getWidth() - 750, getHeight() - 100);
         game_start_sound = new GreenfootSound("game-start.mp3");
+        game_over_sound = new GreenfootSound("game-over.mp3");
     }
 
     public void act() {
@@ -47,6 +49,7 @@ public class MyWorld extends World {
         if (get_hp <= 0) {
             
             gameStarted = false;
+            game_over_sound.play();
             Greenfoot.stop();
         }
     }
