@@ -4,7 +4,7 @@ import java.util.Random;
 public class MainEnemy extends Actor {
     public GreenfootSound fitt_in;
     private int ySpeed = 1;
-
+    private boolean removed = false;
     private int bulletSpawnTimer = 0;
     private int bulletSpawnDelay = 85;
     
@@ -17,25 +17,31 @@ public class MainEnemy extends Actor {
 
     public void act() {   
         // Mișcare în jos
+        MyWorld myworld = (MyWorld) getWorld();
         setLocation(getX(), getY() + ySpeed);
         addBullet();
         // Verificare dacă a ajuns în partea de jos a ecranului și resetare poziție la partea de sus
         if (getY() >= getWorld().getHeight() - 1) {
-            getWorld().removeObject(this);
-        }
-        if (isTouching(PlayerBullet.class)) {
             
-            MyWorld myworld = (MyWorld) getWorld();
+            if (!removed) {
+                getWorld().removeObject(this);
+                removed = true;
+            }
+        }
+        else if (isTouching(PlayerBullet.class)) {
+            
+            
             getWorld().removeObject(this);
             myworld.increaseScore();
-            
+            removed = true;
           
         }
         else if (isTouching(MainPlayer.class)) {
-            MyWorld myworld = (MyWorld) getWorld();
+            
             myworld.decreaseHp();
             fitt_in.play();
             getWorld().removeObject(this);
+            removed = true;
         }
     }
     

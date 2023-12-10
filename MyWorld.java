@@ -28,38 +28,47 @@ public class MyWorld extends World {
         game_start_sound = new GreenfootSound("game-start.mp3");
         game_over_sound = new GreenfootSound("game-over.mp3");
     }
-
-    public void act() {
-        if (Greenfoot.mouseClicked(null)) {
-            if (!gameStarted) {
-                checkButtonClicks();
-            }
-        }
-
-        if (gameStarted) {
-            addNewEnemyWithTimer();
-            
-            if (check_update) {
-                
-                addObject(new GameMisc(get_hp, get_score, x_misc, y_misc), x_misc, y_misc);
-                check_update = false;
-                
-            }
-        }
-        if (get_hp <= 0) {
-            
-            gameStarted = false;
-            game_over_sound.play();
-            Greenfoot.stop();
-            addObject(new GameOverMenu(get_score), getWidth() / 2, getHeight() / 2 - 70);
-            addObject(new Button("Retry"), getWidth() / 2 - 150, getHeight() / 2 + 50);
-            addObject(new Button("Main Menu"), getWidth() / 2 + 100, getHeight() / 2 + 50);
-            
-        }
-    }
-
-    // Menu
     
+    public boolean gameOver = false;
+    public void act() {
+        
+        if (!gameOver) {
+            
+            if (Greenfoot.mouseClicked(null) && !gameOver) {
+                if (!gameStarted) {
+                    checkButtonClicks();
+                }
+            } 
+            if (gameStarted && !gameOver) {
+                addNewEnemyWithTimer();
+                
+                if (check_update) {
+                    
+                    addObject(new GameMisc(get_hp, get_score, x_misc, y_misc), x_misc, y_misc);
+                    check_update = false;
+                    
+                }
+            }
+            if (get_hp <= 0 && !gameOver) {
+                
+                gameStarted = false;
+                gameOver = true;
+                
+            }
+            
+        } else {
+            
+            game_over_sound.play();
+            
+            addObject(new GameOverMenu(get_score), getWidth() / 2, getHeight() / 2);
+            Greenfoot.stop();
+            
+        }
+    
+    }
+    
+    // Alte metode existente...
+
     private void checkButtonClicks() {
         List<Button> buttons = getObjects(Button.class);
 
@@ -85,6 +94,10 @@ public class MyWorld extends World {
             System.out.println("Jocul a fost închis.");
         } else if (button.getLabel().equals("Shop")) {
             System.out.println("Accesează magazinul!");
+        } else if (button.getLabel().equals("Retry")) {
+            System.out.println("Ok");
+        } else if (button.getLabel().equals("Main Menu")) {
+            System.out.println("Ok");
         }
     }
 
@@ -100,21 +113,30 @@ public class MyWorld extends World {
             enemySpawnTimer = 0;
         }
     }
+    
+    private void retryGame() {
+        // Implementează logica pentru a reseta jocul
+        // de exemplu, reinițializarea variabilelor și eliminarea obiectelor existente
+        // sau redeschiderea scenei de joc
+    }
+
+    private void goToMainMenu() {
+        // Implementează logica pentru a reveni la meniul principal
+        // de exemplu, înlocuirea scenei curente cu meniul principal
+    }
+    
     public void decreaseHp() {
-        
         get_hp -= 10;
         get_score += 50;
         check_update = true;
-        
     }
+    
     public void minHp() {
-        
         get_hp -= 10;
         check_update = true;
-        
     }
+    
     public void increaseScore() {
-        
         get_score += 50;
         check_update = true;
     }
