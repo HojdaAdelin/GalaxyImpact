@@ -53,6 +53,7 @@ public class MyWorld extends World {
             Greenfoot.stop();
             addObject(new GameOverMenu(), getWidth() / 2, getHeight() / 2 - 100);
             addObject(new Button("Retry"), getWidth() / 2, getHeight() / 2);
+            
         }
     }
 
