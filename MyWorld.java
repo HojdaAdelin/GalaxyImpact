@@ -51,9 +51,9 @@ public class MyWorld extends World {
             gameStarted = false;
             game_over_sound.play();
             Greenfoot.stop();
-            addObject(new GameOverMenu(), getWidth() / 2, getHeight() / 2 - 80);
-            addObject(new Button("Retry"), getWidth() / 2 - 150, getHeight() / 2);
-            addObject(new Button("Main Menu"), getWidth() / 2 + 100, getHeight() / 2);
+            addObject(new GameOverMenu(get_score), getWidth() / 2, getHeight() / 2 - 70);
+            addObject(new Button("Retry"), getWidth() / 2 - 150, getHeight() / 2 + 50);
+            addObject(new Button("Main Menu"), getWidth() / 2 + 100, getHeight() / 2 + 50);
             
         }
     }
