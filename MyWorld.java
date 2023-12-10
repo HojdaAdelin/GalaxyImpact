@@ -106,7 +106,7 @@ public class MyWorld extends World {
 
         if (enemySpawnTimer >= enemySpawnDelay) {
             Random rand = new Random();
-            int randomX = rand.nextInt(800);
+            int randomX = rand.nextInt(700);
             addObject(new MainEnemy(), randomX, 0);
 
             // Resetăm timerul
