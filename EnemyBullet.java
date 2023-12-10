@@ -21,6 +21,7 @@ public class EnemyBullet extends MainEnemy
             if (!removed) {
                 getWorld().removeObject(this);
                 removed = true;
+                
             }
         } else if (isTouching(MainPlayer.class) && !isTouching(PlayerBullet.class)) {
             

@@ -26,6 +26,7 @@ public class MainEnemy extends Actor {
             if (!removed) {
                 getWorld().removeObject(this);
                 removed = true;
+                myworld.minHp();
             }
         }
         else if (isTouching(PlayerBullet.class)) {
