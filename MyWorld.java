@@ -174,13 +174,10 @@ public class MyWorld extends World {
     // Save Score
     public void saveScore() {
         try {
-            // Specifică calea către fișier
+            
             String caleFisier = "scor.txt";
-    
-            // Crează un obiect File
             File fisier = new File(caleFisier);
     
-            // Verifică dacă fișierul există; dacă nu, creează-l
             if (!fisier.exists()) {
                 fisier.createNewFile();
             }
