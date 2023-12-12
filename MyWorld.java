@@ -1,6 +1,12 @@
 import lang.stride.*;
 import java.util.*;
+import java.io.FileWriter;
+import java.io.IOException;
 import greenfoot.*;
+import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.BufferedWriter;
 
 public class MyWorld extends World {
     
@@ -15,6 +21,7 @@ public class MyWorld extends World {
     private int enemySpawnDelay = 60;
     public int get_hp = 100;
     public int get_score = 0;
+    public int score_from_text;
     public int x_misc = 80;
     public int y_misc = getHeight() - 50;
 
@@ -59,7 +66,8 @@ public class MyWorld extends World {
         } else {
             
             game_over_sound.play();
-            
+            getScore();
+            saveScore();
             addObject(new GameOverMenu(get_score), getWidth() / 2, getHeight() / 2);
             Greenfoot.stop();
             
@@ -93,7 +101,15 @@ public class MyWorld extends World {
         } else if (button.getLabel().equals("Exit")) {
             System.out.println("Jocul a fost închis.");
         } else if (button.getLabel().equals("Shop")) {
-            System.out.println("Accesează magazinul!");
+            
+            removeObject(button);
+            List<Button> buttons = getObjects(Button.class);
+            for (Button b : buttons) {
+                removeObject(b);
+            }
+            
+            addObject(new Shop(getWidth(), getHeight() / 2 - 200), getWidth(), getHeight() / 2 - 200);
+            
         } else if (button.getLabel().equals("Retry")) {
             System.out.println("Ok");
         } else if (button.getLabel().equals("Main Menu")) {
@@ -140,4 +156,64 @@ public class MyWorld extends World {
         get_score += 50;
         check_update = true;
     }
+    
+    // Save Score
+    public void saveScore() {
+        try {
+            // Specifică calea către fișier
+            String caleFisier = "scor.txt";
+    
+            // Crează un obiect File
+            File fisier = new File(caleFisier);
+    
+            // Verifică dacă fișierul există; dacă nu, creează-l
+            if (!fisier.exists()) {
+                fisier.createNewFile();
+            }
+    
+            // Deschide BufferedWriter pentru a scrie în fișier
+            BufferedWriter writer = new BufferedWriter(new FileWriter(fisier));
+    
+            // Converteste scorul la String si scrie-l în fișier
+            writer.write(Integer.toString(get_score + score_from_text));
+    
+            // Închide BufferedWriter
+            writer.close();
+    
+            // System.out.println("Datele au fost scrise în fișier.");
+    
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    // Get Score
+    public void getScore() {
+        
+        try {
+            // Specifică calea către fișier
+            String caleFisier = "scor.txt";
+
+            // Crează un obiect File
+            File fisier = new File(caleFisier);
+
+            // Deschide BufferedReader pentru a citi din fișier
+            BufferedReader reader = new BufferedReader(new FileReader(fisier));
+
+            String linie;
+            // Citeste fiecare linie din fișier
+            while ((linie = reader.readLine()) != null) {
+                
+                score_from_text = Integer.parseInt(linie);
+                
+            }
+
+            // Închide BufferedReader
+            reader.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+    }
+    
 }
