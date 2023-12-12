@@ -28,10 +28,12 @@ public class MyWorld extends World {
     public MyWorld() {
         super(900, 600, 1);
         player = new MainPlayer();
+        getScore();
         //game_misc = new GameMisc(get_hp, get_score, x_misc, y_misc);
         addObject(new Button("Play"), getWidth() / 2, getHeight() - 100);
         addObject(new Button("Exit"), getWidth() - 150, getHeight() - 100);
         addObject(new Button("Shop"), getWidth() - 750, getHeight() - 100);
+        addObject(new Points(score_from_text), 150, 80);
         game_start_sound = new GreenfootSound("game-start.mp3");
         game_over_sound = new GreenfootSound("game-over.mp3");
     }
