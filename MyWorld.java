@@ -92,6 +92,12 @@ public class MyWorld extends World {
     private void handleButtonClick(Button button) {
         if (button.getLabel().equals("Play")) {
             gameStarted = true;
+            
+            List<Points> points = getObjects(Points.class);
+                for (Points p : points) {
+                    removeObject(p);
+            }
+            
             removeObject(button);
             List<Button> buttons = getObjects(Button.class);
             for (Button b : buttons) {
@@ -105,9 +111,15 @@ public class MyWorld extends World {
         } else if (button.getLabel().equals("Shop")) {
             
             removeObject(button);
+            
             List<Button> buttons = getObjects(Button.class);
             for (Button b : buttons) {
                 removeObject(b);
+            }
+            
+            List<Points> points = getObjects(Points.class);
+                for (Points p : points) {
+                    removeObject(p);
             }
             
             addObject(new Shop(getWidth(), getHeight() / 2 - 200), getWidth(), getHeight() / 2 - 200);
