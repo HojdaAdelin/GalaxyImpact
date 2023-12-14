@@ -33,7 +33,7 @@ public class MyWorld extends World {
         addObject(new Button("Play"), getWidth() / 2, getHeight() - 100);
         addObject(new Button("Exit"), getWidth() - 150, getHeight() - 100);
         addObject(new Button("Shop"), getWidth() - 750, getHeight() - 100);
-        addObject(new Points(score_from_text), 150, 80);
+        addObject(new Points(score_from_text), 150, 100);
         game_start_sound = new GreenfootSound("game-start.mp3");
         game_over_sound = new GreenfootSound("game-over.mp3");
     }
@@ -122,7 +122,7 @@ public class MyWorld extends World {
                     removeObject(p);
             }
             
-            addObject(new Shop(getWidth(), getHeight() / 2 - 200), getWidth(), getHeight() / 2 - 200);
+            Shop();
             
         } else if (button.getLabel().equals("Retry")) {
             System.out.println("Ok");
@@ -224,6 +224,16 @@ public class MyWorld extends World {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        
+    }
+    
+    // Shop
+    
+    public void Shop() {
+        
+        getScore();
+        addObject(new Labels("Shop"), getWidth() / 2, 50);
+        addObject(new Points(score_from_text), 150, 100);
         
     }
     

@@ -1,7 +1,0 @@
-#BlueJ class context
-comment0.target=Shop
-comment1.params=x\ y
-comment1.target=Shop(int,\ int)
-comment2.params=
-comment2.target=void\ act()
-numComments=3
