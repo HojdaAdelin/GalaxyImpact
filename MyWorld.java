@@ -16,6 +16,7 @@ public class MyWorld extends World {
     public GreenfootSound game_over_sound;
     public MainPlayer player;
     public GameMisc game_misc;
+    String caracter_navy = "default";
     
     private int enemySpawnTimer = 0;
     private int enemySpawnDelay = 60;
@@ -130,11 +131,19 @@ public class MyWorld extends World {
             System.out.println("Ok");
         } else if (button.getLabel().equals("Buy Navy1")) {
             
-            System.out.println("Ok");
+            if (score_from_text >=  10000) {
+                
+                
+                
+            }
             
         } else if (button.getLabel().equals("Buy Navy2")) {
             
-            System.out.println("Ok");
+            if (score_from_text >=  50000) {
+                
+                
+                
+            }
                     
         }
     }
@@ -256,6 +265,61 @@ public class MyWorld extends World {
             
         } 
         
+        
+    }
+    
+    public void saveNavy() {
+        try {
+            
+            String caleFisier = "navy.txt";
+            File fisier = new File(caleFisier);
+    
+            if (!fisier.exists()) {
+                fisier.createNewFile();
+            }
+    
+            // Deschide BufferedWriter pentru a scrie în fișier
+            BufferedWriter writer = new BufferedWriter(new FileWriter(fisier));
+    
+            // Converteste scorul la String si scrie-l în fișier
+            writer.write(caracter_navy);
+    
+            // Închide BufferedWriter
+            writer.close();
+    
+            // System.out.println("Datele au fost scrise în fișier.");
+    
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void getNavy() {
+        
+        try {
+            // Specifică calea către fișier
+            String caleFisier = "navy.txt";
+
+            // Crează un obiect File
+            File fisier = new File(caleFisier);
+
+            // Deschide BufferedReader pentru a citi din fișier
+            BufferedReader reader = new BufferedReader(new FileReader(fisier));
+
+            String linie;
+            // Citeste fiecare linie din fișier
+            while ((linie = reader.readLine()) != null) {
+                
+                caracter_navy = linie;
+                
+            }
+
+            // Închide BufferedReader
+            reader.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         
     }
     
