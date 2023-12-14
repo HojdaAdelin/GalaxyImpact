@@ -28,8 +28,17 @@ public class MyWorld extends World {
 
     public MyWorld() {
         super(900, 600, 1);
+        
         player = new MainPlayer();
         getScore();
+        
+        String caleFisier = "navy.txt";
+        File misc = new File(caleFisier);
+    
+        if (!misc.exists()) {
+            saveNavy();
+        }
+        
         //game_misc = new GameMisc(get_hp, get_score, x_misc, y_misc);
         addObject(new Button("Play"), getWidth() / 2, getHeight() - 100);
         addObject(new Button("Exit"), getWidth() - 150, getHeight() - 100);
@@ -152,7 +161,7 @@ public class MyWorld extends World {
             List<Points> points = getObjects(Points.class);
             if (score_from_text >=  50000) {
                 
-                get_score = -10000;
+                get_score = -50000;
                 saveScore();
                 get_score = 0;
                 getScore();
@@ -298,49 +307,20 @@ public class MyWorld extends World {
                 fisier.createNewFile();
             }
     
-            // Deschide BufferedWriter pentru a scrie în fișier
+            
             BufferedWriter writer = new BufferedWriter(new FileWriter(fisier));
     
-            // Converteste scorul la String si scrie-l în fișier
+           
             writer.write(caracter_navy);
     
-            // Închide BufferedWriter
+            
             writer.close();
     
-            // System.out.println("Datele au fost scrise în fișier.");
+            
     
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-    
-    public void getNavy() {
-        
-        try {
-            // Specifică calea către fișier
-            String caleFisier = "navy.txt";
-
-            // Crează un obiect File
-            File fisier = new File(caleFisier);
-
-            // Deschide BufferedReader pentru a citi din fișier
-            BufferedReader reader = new BufferedReader(new FileReader(fisier));
-
-            String linie;
-            // Citeste fiecare linie din fișier
-            while ((linie = reader.readLine()) != null) {
-                
-                caracter_navy = linie;
-                
-            }
-
-            // Închide BufferedReader
-            reader.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
     }
     
 }

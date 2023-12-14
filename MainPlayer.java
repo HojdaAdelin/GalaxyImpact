@@ -1,13 +1,37 @@
 import greenfoot.*;
+import java.io.File;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.*;
 
 public class MainPlayer extends Actor {
     
+    String caracter_navy;
     public int delay = 25;
     
     public MainPlayer() {
-        GreenfootImage playerImage = new GreenfootImage("main-player.png");
-        setImage(playerImage);
-        playerImage.scale(100, 80);
+        getNavy();
+        
+        if ("default".equals(caracter_navy)) {
+            
+            GreenfootImage playerImage = new GreenfootImage("main-player.png");
+            setImage(playerImage);
+            playerImage.scale(100, 100);
+            
+        } else if ("navy1".equals(caracter_navy)) {
+            
+            GreenfootImage playerImage = new GreenfootImage("navy-1.png");
+            setImage(playerImage);
+            playerImage.scale(120, 100);
+            
+        } else if ("navy2".equals(caracter_navy)) {
+            
+            GreenfootImage playerImage = new GreenfootImage("navy-2.png");
+            setImage(playerImage);
+            playerImage.scale(140, 100);
+            
+        }
+        
     }
     
     public void act() {
@@ -44,5 +68,34 @@ public class MainPlayer extends Actor {
     {
         PlayerBullet bullet = new PlayerBullet();
         getWorld().addObject(bullet, getX(), getY() - 30); // Adaugă bullet-ul deasupra player-ului
+    }
+    
+    public void getNavy() {
+        
+        try {
+            
+            String caleFisier = "navy.txt";
+
+            
+            File fisier = new File(caleFisier);
+
+            
+            BufferedReader reader = new BufferedReader(new FileReader(fisier));
+
+            String linie;
+            
+            while ((linie = reader.readLine()) != null) {
+                
+                caracter_navy = linie;
+                
+            }
+
+            
+            reader.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
     }
 }

@@ -8,4 +8,6 @@ comment3.params=
 comment3.target=void\ checkKeyPress()
 comment4.params=
 comment4.target=void\ fireBullet()
-numComments=5
+comment5.params=
+comment5.target=void\ getNavy()
+numComments=6
