@@ -128,6 +128,14 @@ public class MyWorld extends World {
             System.out.println("Ok");
         } else if (button.getLabel().equals("Main Menu")) {
             System.out.println("Ok");
+        } else if (button.getLabel().equals("Buy Navy1")) {
+            
+            System.out.println("Ok");
+            
+        } else if (button.getLabel().equals("Buy Navy2")) {
+            
+            System.out.println("Ok");
+                    
         }
     }
 
@@ -239,9 +247,15 @@ public class MyWorld extends World {
         addObject(new Labels("Navy 2: 50000"), 180, 375);
         addObject(new Images("navy-2.png", 150, 115), 150, 470);
         
-        // Buttons
-        addObject(new Button2("Buy Navy1"), 170, 310);
-        addObject(new Button2("Buy Navy2"), 170, 555);
+        addObject(new Button("Buy Navy1"), 170, 310);
+        addObject(new Button("Buy Navy2"), 170, 555);
+        
+        if (Greenfoot.mouseClicked(null)) {
+                
+            checkButtonClicks();
+            
+        } 
+        
         
     }
     
