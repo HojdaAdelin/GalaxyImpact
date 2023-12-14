@@ -131,21 +131,37 @@ public class MyWorld extends World {
             System.out.println("Ok");
         } else if (button.getLabel().equals("Buy Navy1")) {
             
+            List<Points> points = getObjects(Points.class);
+            
             if (score_from_text >=  10000) {
                 
                 get_score = -10000;
                 saveScore();
                 get_score = 0;
+                getScore();
+                for (Points b : points) {
+                    removeObject(b);
+                }
+                addObject(new Points(score_from_text), 150, 55);
+                caracter_navy = "navy1";
+                saveNavy();
                 
             }
             
         } else if (button.getLabel().equals("Buy Navy2")) {
-            
+            List<Points> points = getObjects(Points.class);
             if (score_from_text >=  50000) {
                 
                 get_score = -10000;
                 saveScore();
                 get_score = 0;
+                getScore();
+                for (Points b : points) {
+                    removeObject(b);
+                }
+                addObject(new Points(score_from_text), 150, 55);
+                caracter_navy = "navy2";
+                saveNavy();
                 
             }
                     
