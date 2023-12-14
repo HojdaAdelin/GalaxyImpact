@@ -133,7 +133,9 @@ public class MyWorld extends World {
             
             if (score_from_text >=  10000) {
                 
-                
+                get_score = -10000;
+                saveScore();
+                get_score = 0;
                 
             }
             
@@ -141,7 +143,9 @@ public class MyWorld extends World {
             
             if (score_from_text >=  50000) {
                 
-                
+                get_score = -10000;
+                saveScore();
+                get_score = 0;
                 
             }
                     
