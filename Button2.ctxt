@@ -1,7 +1,7 @@
 #BlueJ class context
-comment0.target=Button
+comment0.target=Button2
 comment1.params=label
-comment1.target=Button(java.lang.String)
+comment1.target=Button2(java.lang.String)
 comment2.params=
 comment2.target=java.lang.String\ getLabel()
 comment3.params=

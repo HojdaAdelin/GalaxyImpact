@@ -33,7 +33,7 @@ public class MyWorld extends World {
         addObject(new Button("Play"), getWidth() / 2, getHeight() - 100);
         addObject(new Button("Exit"), getWidth() - 150, getHeight() - 100);
         addObject(new Button("Shop"), getWidth() - 750, getHeight() - 100);
-        addObject(new Points(score_from_text), 150, 80);
+        addObject(new Points(score_from_text), 150, 55);
         game_start_sound = new GreenfootSound("game-start.mp3");
         game_over_sound = new GreenfootSound("game-over.mp3");
     }
@@ -233,11 +233,16 @@ public class MyWorld extends World {
         
         getScore();
         addObject(new Labels("Shop"), getWidth() / 2, 50);
-        addObject(new Points(score_from_text), 150, 80);
-        addObject(new Labels("Navy 1: 10000"), 180, 150);
-        addObject(new Images("navy-1.png", 150, 115), 150, 250);
-        addObject(new Labels("Navy 2: 50000"), 180, 400);
-        addObject(new Images("navy-2.png", 150, 115), 150, 500);
+        addObject(new Points(score_from_text), 150, 55);
+        addObject(new Labels("Navy 1: 10000"), 180, 125);
+        addObject(new Images("navy-1.png", 150, 115), 150, 215);
+        addObject(new Labels("Navy 2: 50000"), 180, 375);
+        addObject(new Images("navy-2.png", 150, 115), 150, 470);
+        
+        // Buttons
+        addObject(new Button2("Buy Navy1"), 170, 310);
+        addObject(new Button2("Buy Navy2"), 170, 555);
+        
     }
     
 }

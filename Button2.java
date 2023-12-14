@@ -1,9 +1,9 @@
 import greenfoot.*;
 
-public class Button extends Actor {
+public class Button2 extends Actor {
     private String label;
 
-    public Button(String label) {
+    public Button2(String label) {
         this.label = label;
         updateImage();
     }
@@ -13,14 +13,13 @@ public class Button extends Actor {
     }
 
     public void act() {
-        if (Greenfoot.mouseClicked(this)) {
-            
-        }
+        
     }
 
     private void updateImage() {
-        GreenfootImage image = new GreenfootImage(label, 50, Color.WHITE, new Color(150, 150, 150, 0));
+        GreenfootImage image = new GreenfootImage(label, 40, Color.WHITE, new Color(150, 150, 150, 0));
         setImage(image);
     }
 
+    
 }
