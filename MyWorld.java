@@ -14,6 +14,7 @@ public class MyWorld extends World {
     public boolean check_update = false;
     public GreenfootSound game_start_sound;
     public GreenfootSound game_over_sound;
+    public GreenfootSound game_sound;
     public MainPlayer player;
     public GameMisc game_misc;
     String caracter_navy = "default";
@@ -40,12 +41,13 @@ public class MyWorld extends World {
         }
         
         //game_misc = new GameMisc(get_hp, get_score, x_misc, y_misc);
-        addObject(new Button("Play"), getWidth() / 2, getHeight() - 100);
-        addObject(new Button("Exit"), getWidth() - 150, getHeight() - 100);
-        addObject(new Button("Shop"), getWidth() - 750, getHeight() - 100);
+        addObject(new Button("Play", 50), getWidth() / 2, getHeight() - 100);
+        addObject(new Button("Exit", 50), getWidth() - 150, getHeight() - 100);
+        addObject(new Button("Shop", 50), getWidth() - 750, getHeight() - 100);
         addObject(new Points(score_from_text), 150, 55);
         game_start_sound = new GreenfootSound("game-start.mp3");
         game_over_sound = new GreenfootSound("game-over.mp3");
+        game_sound = new GreenfootSound("game.mp3");
     }
     
     public boolean gameOver = false;
@@ -53,12 +55,15 @@ public class MyWorld extends World {
         
         if (!gameOver) {
             
+            game_sound.play();
             if (Greenfoot.mouseClicked(null) && !gameOver) {
                 if (!gameStarted) {
                     checkButtonClicks();
+                    
                 }
             } 
             if (gameStarted && !gameOver) {
+                game_sound.stop();
                 addNewEnemyWithTimer();
                 
                 if (check_update) {
@@ -285,8 +290,8 @@ public class MyWorld extends World {
         addObject(new Labels("Navy 2: 50000"), 180, 375);
         addObject(new Images("navy-2.png", 150, 115), 150, 470);
         
-        addObject(new Button("Buy Navy1"), 170, 310);
-        addObject(new Button("Buy Navy2"), 170, 555);
+        addObject(new Button("Buy Navy1", 35), 170, 310);
+        addObject(new Button("Buy Navy2", 35), 170, 555);
         
         if (Greenfoot.mouseClicked(null)) {
                 

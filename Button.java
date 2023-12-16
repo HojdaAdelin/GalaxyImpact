@@ -2,9 +2,11 @@ import greenfoot.*;
 
 public class Button extends Actor {
     private String label;
+    public int size;
 
-    public Button(String label) {
+    public Button(String label, int size) {
         this.label = label;
+        this.size = size;
         updateImage();
     }
 
@@ -19,7 +21,7 @@ public class Button extends Actor {
     }
 
     private void updateImage() {
-        GreenfootImage image = new GreenfootImage(label, 50, Color.WHITE, new Color(150, 150, 150, 0));
+        GreenfootImage image = new GreenfootImage(label, size, Color.WHITE, new Color(150, 150, 150, 0));
         setImage(image);
     }
 
