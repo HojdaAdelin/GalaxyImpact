@@ -12,6 +12,7 @@ public class MyWorld extends World {
     
     private boolean gameStarted = false;
     public boolean check_update = false;
+    public boolean check_mute = false;
     public GreenfootSound game_start_sound;
     public GreenfootSound game_over_sound;
     public GreenfootSound game_sound;
@@ -44,6 +45,16 @@ public class MyWorld extends World {
         addObject(new Button("Play", 50), getWidth() / 2, getHeight() - 100);
         addObject(new Button("Exit", 50), getWidth() - 150, getHeight() - 100);
         addObject(new Button("Shop", 50), getWidth() - 750, getHeight() - 100);
+        if (!check_mute) {
+            
+            addObject(new Button("Mute music", 40), 750, 55);
+            
+        } else {
+            
+            addObject(new Button("Unmute music", 40), 750, 55);
+            
+        }
+        
         addObject(new Points(score_from_text), 150, 55);
         game_start_sound = new GreenfootSound("game-start.mp3");
         game_over_sound = new GreenfootSound("game-over.mp3");
@@ -139,13 +150,24 @@ public class MyWorld extends World {
             
             Shop();
             
-        } else if (button.getLabel().equals("Retry")) {
-            System.out.println("Ok");
-        } else if (button.getLabel().equals("Main Menu")) {
+        } else if (button.getLabel().equals("Mute music")) {
+            
+            removeObject(button);
+            addObject(new Button("Unmute music", 40), 750, 55);
+            game_sound.setVolume(0);
+            
+        } else if (button.getLabel().equals("Unmute music")) {
+            
+            removeObject(button);
+            addObject(new Button("Mute music", 40), 750, 55);
+            game_sound.setVolume(100);
+            
+        }else if (button.getLabel().equals("Main Menu")) {
             System.out.println("Ok");
         } else if (button.getLabel().equals("Buy Navy1")) {
             
             List<Points> points = getObjects(Points.class);
+            
             
             if (score_from_text >=  10000) {
                 
