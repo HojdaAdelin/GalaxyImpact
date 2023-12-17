@@ -215,8 +215,40 @@ public class MyWorld extends World {
                 saveNavy();
                 caracter_navy_index2 = 1;
                 saveNavyIndex();
-            }
+            } 
                     
+        } else if (button.getLabel().equals("Select Navy1")) {
+                
+            caracter_navy = "navy1";
+            removeObject(button);
+            List<Button> buttons = getObjects(Button.class);
+            for (Button b : buttons) {
+                if (b.getLabel() == "Selected") {
+                    
+                    removeObject(b);
+                    
+                }
+            }
+            addObject(new Button("Selected", 35), 170, 310);
+            addObject(new Button("Select Navy2", 35), 170, 555);
+            saveNavy();
+                
+        } else if (button.getLabel().equals("Select Navy2")) {
+                
+            caracter_navy = "navy2";
+            removeObject(button);
+            List<Button> buttons = getObjects(Button.class);
+            for (Button b : buttons) {
+                if (b.getLabel() == "Selected") {
+                    
+                    removeObject(b);
+                    
+                }
+            }
+            addObject(new Button("Select Navy1", 35), 170, 310);
+            addObject(new Button("Selected", 35), 170, 555);
+            saveNavy();
+                
         }
     }
 
@@ -341,7 +373,7 @@ public class MyWorld extends World {
         } else if ("navy2".equals(caracter_navy)) {
             addObject(new Button("Selected", 35), 170, 555);
         } else {
-            addObject(new Button("Select Navy1", 35), 170, 555);
+            addObject(new Button("Select Navy2", 35), 170, 555);
         }
         
         if (Greenfoot.mouseClicked(null)) {
