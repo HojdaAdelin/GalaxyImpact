@@ -322,6 +322,7 @@ public class MyWorld extends World {
         
         getScore();
         getNavyIndex();
+        getNavy();
         addObject(new Labels("Shop"), getWidth() / 2, 50);
         addObject(new Points(score_from_text), 150, 55);
         addObject(new Labels("Navy 1: 10000"), 180, 125);
@@ -330,17 +331,17 @@ public class MyWorld extends World {
         addObject(new Images("navy-2.png", 150, 115), 150, 470);
         if (caracter_navy_index1 == 0) {
             addObject(new Button("Buy Navy1", 35), 170, 310);
+        } else if ("navy1".equals(caracter_navy)) {
+            addObject(new Button("Selected", 35), 170, 310);
         } else {
-            
             addObject(new Button("Select Navy1", 35), 170, 310);
-            
         }
         if (caracter_navy_index2 == 0) {
             addObject(new Button("Buy Navy2", 35), 170, 555);
+        } else if ("navy2".equals(caracter_navy)) {
+            addObject(new Button("Selected", 35), 170, 555);
         } else {
-            
-            addObject(new Button("Select Navy2", 35), 170, 555);
-            
+            addObject(new Button("Select Navy1", 35), 170, 555);
         }
         
         if (Greenfoot.mouseClicked(null)) {
@@ -421,6 +422,34 @@ public class MyWorld extends World {
             }
 
             // Închide BufferedReader
+            reader.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+    }
+    public void getNavy() {
+        
+        try {
+            
+            String caleFisier = "navy.txt";
+
+            
+            File fisier = new File(caleFisier);
+
+            
+            BufferedReader reader = new BufferedReader(new FileReader(fisier));
+
+            String linie;
+            
+            while ((linie = reader.readLine()) != null) {
+                
+                caracter_navy = linie;
+                
+            }
+
+            
             reader.close();
 
         } catch (IOException e) {
