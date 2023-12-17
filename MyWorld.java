@@ -12,6 +12,8 @@ public class MyWorld extends World {
     
     private boolean gameStarted = false;
     public boolean check_update = false;
+    public int caracter_navy_index1 = 0;
+    public int caracter_navy_index2 = 0;
     public boolean check_mute = false;
     public GreenfootSound game_start_sound;
     public GreenfootSound game_over_sound;
@@ -35,11 +37,22 @@ public class MyWorld extends World {
         getScore();
         
         String caleFisier = "navy.txt";
+        String indexFisier = "navy_index.txt";
         File misc = new File(caleFisier);
+        File index = new File(indexFisier);
     
         if (!misc.exists()) {
             saveNavy();
         }
+        if (!index.exists()) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(index))) {
+                index.createNewFile();
+                writer.write(Integer.toString(0) + "\n");
+                writer.write(Integer.toString(0));
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
+        }   
         
         //game_misc = new GameMisc(get_hp, get_score, x_misc, y_misc);
         addObject(new Button("Play", 50), getWidth() / 2, getHeight() - 100);
@@ -166,10 +179,10 @@ public class MyWorld extends World {
             System.out.println("Ok");
         } else if (button.getLabel().equals("Buy Navy1")) {
             
+            getNavyIndex();
             List<Points> points = getObjects(Points.class);
             
-            
-            if (score_from_text >=  10000) {
+            if (score_from_text >=  10000 && caracter_navy_index1 == 0) {
                 
                 get_score = -10000;
                 saveScore();
@@ -181,12 +194,14 @@ public class MyWorld extends World {
                 addObject(new Points(score_from_text), 150, 55);
                 caracter_navy = "navy1";
                 saveNavy();
-                
+                caracter_navy_index1 = 1;
+                saveNavyIndex();
             }
             
         } else if (button.getLabel().equals("Buy Navy2")) {
+            getNavyIndex();
             List<Points> points = getObjects(Points.class);
-            if (score_from_text >=  50000) {
+            if (score_from_text >=  50000 && caracter_navy_index2 == 0) {
                 
                 get_score = -50000;
                 saveScore();
@@ -198,7 +213,8 @@ public class MyWorld extends World {
                 addObject(new Points(score_from_text), 150, 55);
                 caracter_navy = "navy2";
                 saveNavy();
-                
+                caracter_navy_index2 = 1;
+                saveNavyIndex();
             }
                     
         }
@@ -349,5 +365,55 @@ public class MyWorld extends World {
             e.printStackTrace();
         }
     }
+    public void saveNavyIndex() {
+        try {
+            
+            String caleFisier = "navy_index.txt";
+            File fisier = new File(caleFisier);
+                       
+            BufferedWriter writer = new BufferedWriter(new FileWriter(fisier));
+        
+            writer.write(Integer.toString(caracter_navy_index1) + "\n");
+            writer.write(Integer.toString(caracter_navy_index2));
+                
+            writer.close();
+                
+            
     
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void getNavyIndex() {
+        
+        try {
+            // Specifică calea către fișier
+            String caleFisier = "navy_index.txt";
+
+            // Crează un obiect File
+            File fisier = new File(caleFisier);
+
+            // Deschide BufferedReader pentru a citi din fișier
+            BufferedReader reader = new BufferedReader(new FileReader(fisier));
+
+            String linie;
+
+            
+            if ((linie = reader.readLine()) != null) {
+                caracter_navy_index1 = Integer.parseInt(linie);
+            }
+            
+            
+            if ((linie = reader.readLine()) != null) {
+                caracter_navy_index2 = Integer.parseInt(linie);
+            }
+
+            // Închide BufferedReader
+            reader.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
+    }
 }
