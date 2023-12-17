@@ -321,15 +321,27 @@ public class MyWorld extends World {
     public void Shop() {
         
         getScore();
+        getNavyIndex();
         addObject(new Labels("Shop"), getWidth() / 2, 50);
         addObject(new Points(score_from_text), 150, 55);
         addObject(new Labels("Navy 1: 10000"), 180, 125);
         addObject(new Images("navy-1.png", 150, 115), 150, 215);
         addObject(new Labels("Navy 2: 50000"), 180, 375);
         addObject(new Images("navy-2.png", 150, 115), 150, 470);
-        
-        addObject(new Button("Buy Navy1", 35), 170, 310);
-        addObject(new Button("Buy Navy2", 35), 170, 555);
+        if (caracter_navy_index1 == 0) {
+            addObject(new Button("Buy Navy1", 35), 170, 310);
+        } else {
+            
+            addObject(new Button("Select Navy1", 35), 170, 310);
+            
+        }
+        if (caracter_navy_index2 == 0) {
+            addObject(new Button("Buy Navy2", 35), 170, 555);
+        } else {
+            
+            addObject(new Button("Select Navy2", 35), 170, 555);
+            
+        }
         
         if (Greenfoot.mouseClicked(null)) {
                 
