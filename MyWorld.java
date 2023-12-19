@@ -196,6 +196,8 @@ public class MyWorld extends World {
                 saveNavy();
                 caracter_navy_index1 = 1;
                 saveNavyIndex();
+                removeObject(button);
+                addObject(new Button("Select Navy1", 35), 150, 400);
             }
             
         } else if (button.getLabel().equals("Buy Navy2")) {
@@ -215,6 +217,8 @@ public class MyWorld extends World {
                 saveNavy();
                 caracter_navy_index2 = 1;
                 saveNavyIndex();
+                removeObject(button);
+                addObject(new Button("Select Navy2", 35), 450, 400);
             } 
                     
         } else if (button.getLabel().equals("Select Navy1")) {
@@ -226,11 +230,11 @@ public class MyWorld extends World {
                 if (b.getLabel() == "Selected") {
                     
                     removeObject(b);
+                    addObject(new Button("Select Navy2", 35), 450, 400);
                     
                 }
             }
-            addObject(new Button("Selected", 35), 170, 310);
-            addObject(new Button("Select Navy2", 35), 170, 555);
+            addObject(new Button("Selected", 35), 150, 400);
             saveNavy();
                 
         } else if (button.getLabel().equals("Select Navy2")) {
@@ -242,11 +246,12 @@ public class MyWorld extends World {
                 if (b.getLabel() == "Selected") {
                     
                     removeObject(b);
+                    addObject(new Button("Select Navy1", 35), 150, 400);
                     
                 }
             }
-            addObject(new Button("Select Navy1", 35), 170, 310);
-            addObject(new Button("Selected", 35), 170, 555);
+            
+            addObject(new Button("Selected", 35), 450, 400);
             saveNavy();
                 
         }
@@ -357,23 +362,23 @@ public class MyWorld extends World {
         getNavy();
         addObject(new Labels("Shop"), getWidth() / 2, 50);
         addObject(new Points(score_from_text), 150, 55);
-        addObject(new Labels("Navy 1: 10000"), 180, 125);
-        addObject(new Images("navy-1.png", 150, 115), 150, 215);
-        addObject(new Labels("Navy 2: 50000"), 180, 375);
-        addObject(new Images("navy-2.png", 150, 115), 150, 470);
+        addObject(new Labels("Navy 1: 10000"), 150, 200);
+        addObject(new Images("navy-1.png", 150, 115), 150, 300);
+        addObject(new Labels("Navy 2: 50000"), 450, 200);
+        addObject(new Images("navy-2.png", 150, 115), 450, 300);
         if (caracter_navy_index1 == 0) {
-            addObject(new Button("Buy Navy1", 35), 170, 310);
+            addObject(new Button("Buy Navy1", 35), 150, 400);
         } else if ("navy1".equals(caracter_navy)) {
-            addObject(new Button("Selected", 35), 170, 310);
+            addObject(new Button("Selected", 35), 150, 400);
         } else {
-            addObject(new Button("Select Navy1", 35), 170, 310);
+            addObject(new Button("Select Navy1", 35), 150, 400);
         }
         if (caracter_navy_index2 == 0) {
-            addObject(new Button("Buy Navy2", 35), 170, 555);
+            addObject(new Button("Buy Navy2", 35), 450, 400);
         } else if ("navy2".equals(caracter_navy)) {
-            addObject(new Button("Selected", 35), 170, 555);
+            addObject(new Button("Selected", 35), 450, 400);
         } else {
-            addObject(new Button("Select Navy2", 35), 170, 555);
+            addObject(new Button("Select Navy2", 35), 450, 400);
         }
         
         if (Greenfoot.mouseClicked(null)) {
