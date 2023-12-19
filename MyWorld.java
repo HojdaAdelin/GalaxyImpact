@@ -61,20 +61,21 @@ public class MyWorld extends World {
         }   
         
         //game_misc = new GameMisc(get_hp, get_score, x_misc, y_misc);
+        addObject(new Labels("Galaxy Impact", 65), getWidth() / 2, 50);
         addObject(new Button("Play", 50), getWidth() / 2, getHeight() - 100);
         addObject(new Button("Exit", 50), getWidth() - 150, getHeight() - 100);
         addObject(new Button("Shop", 50), getWidth() - 750, getHeight() - 100);
         if (!check_mute) {
             
-            addObject(new Button("Mute music", 40), 750, 55);
+            addObject(new Button("Mute music", 40), 775, 55);
             
         } else {
             
-            addObject(new Button("Unmute music", 40), 750, 55);
+            addObject(new Button("Unmute music", 40), 775, 55);
             
         }
         
-        addObject(new Points(score_from_text), 150, 55);
+        addObject(new Points(score_from_text), 125, 55);
         game_start_sound = new GreenfootSound("game-start.mp3");
         game_over_sound = new GreenfootSound("game-over.mp3");
         game_sound = new GreenfootSound("game.mp3");
@@ -142,7 +143,10 @@ public class MyWorld extends World {
                 for (Points p : points) {
                     removeObject(p);
             }
-            
+            List<Labels> label = getObjects(Labels.class);
+            for (Labels b : label) {
+                removeObject(b);
+            }
             removeObject(button);
             List<Button> buttons = getObjects(Button.class);
             for (Button b : buttons) {
@@ -161,7 +165,10 @@ public class MyWorld extends World {
             for (Button b : buttons) {
                 removeObject(b);
             }
-            
+            List<Labels> label = getObjects(Labels.class);
+            for (Labels b : label) {
+                removeObject(b);
+            }
             List<Points> points = getObjects(Points.class);
                 for (Points p : points) {
                     removeObject(p);
@@ -172,13 +179,13 @@ public class MyWorld extends World {
         } else if (button.getLabel().equals("Mute music")) {
             
             removeObject(button);
-            addObject(new Button("Unmute music", 40), 750, 55);
+            addObject(new Button("Unmute music", 40), 775, 55);
             game_sound.setVolume(0);
             
         } else if (button.getLabel().equals("Unmute music")) {
             
             removeObject(button);
-            addObject(new Button("Mute music", 40), 750, 55);
+            addObject(new Button("Mute music", 40), 775, 55);
             game_sound.setVolume(100);
             
         }else if (button.getLabel().equals("Main Menu")) {
