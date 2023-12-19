@@ -42,7 +42,13 @@ public class MyWorld extends World {
         File index = new File(indexFisier);
     
         if (!misc.exists()) {
-            saveNavy();
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(misc))) {
+                misc.createNewFile();
+                writer.write("default");
+                
+            } catch (IOException ioe) {
+                ioe.printStackTrace();
+            }
         }
         if (!index.exists()) {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(index))) {
@@ -360,11 +366,12 @@ public class MyWorld extends World {
         getScore();
         getNavyIndex();
         getNavy();
-        addObject(new Labels("Shop"), getWidth() / 2, 50);
+        addObject(new Labels("Soon!", 60), 750, getHeight() / 2);
+        addObject(new Labels("Shop", 50), getWidth() / 2, 50);
         addObject(new Points(score_from_text), 150, 55);
-        addObject(new Labels("Navy 1: 10000"), 150, 200);
+        addObject(new Labels("Navy 1: 10000", 50), 150, 200);
         addObject(new Images("navy-1.png", 150, 115), 150, 300);
-        addObject(new Labels("Navy 2: 50000"), 450, 200);
+        addObject(new Labels("Navy 2: 50000", 50), 450, 200);
         addObject(new Images("navy-2.png", 150, 115), 450, 300);
         if (caracter_navy_index1 == 0) {
             addObject(new Button("Buy Navy1", 35), 150, 400);

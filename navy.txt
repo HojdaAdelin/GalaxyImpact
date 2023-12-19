@@ -1,1 +1,1 @@
-navy2
+default
