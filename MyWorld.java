@@ -24,6 +24,8 @@ public class MyWorld extends World {
     
     private int enemySpawnTimer = 0;
     private int enemySpawnDelay = 60;
+    private int power_up_timer = 0;
+    private int power_up_delay = 600;
     public int get_hp = 100;
     public int get_score = 0;
     public int score_from_text;
@@ -272,14 +274,24 @@ public class MyWorld extends World {
 
     private void addNewEnemyWithTimer() {
         enemySpawnTimer++;
+        power_up_timer++;
 
         if (enemySpawnTimer >= enemySpawnDelay) {
             Random rand = new Random();
             int randomX = rand.nextInt(700);
             addObject(new MainEnemy(), randomX, 0);
 
-            // Resetăm timerul
+            
             enemySpawnTimer = 0;
+        }
+        if (power_up_timer >= power_up_delay) {
+            
+            Random rand = new Random();
+            int randomX = rand.nextInt(700);
+            addObject(new DoublePw(), randomX, 0);
+            
+            power_up_timer = 0;
+            
         }
     }
     
@@ -394,7 +406,7 @@ public class MyWorld extends World {
         } else {
             addObject(new Button("Select Navy2", 35), 450, 400);
         }
-        addObject(new Button("Main Menu", 35), getWidth() / 2, getHeight() - 50);
+        addObject(new Button("Main Menu", 40), getWidth() / 2, getHeight() - 50);
         if (Greenfoot.mouseClicked(null)) {
                 
             checkButtonClicks();
