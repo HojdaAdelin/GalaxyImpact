@@ -125,7 +125,7 @@ public class MyWorld extends World {
     
     // Alte metode existente...
 
-    private void checkButtonClicks() {
+    public void checkButtonClicks() {
         List<Button> buttons = getObjects(Button.class);
 
         for (Button button : buttons) {
@@ -188,8 +188,6 @@ public class MyWorld extends World {
             addObject(new Button("Mute music", 40), 775, 55);
             game_sound.setVolume(100);
             
-        }else if (button.getLabel().equals("Main Menu")) {
-            System.out.println("Ok");
         } else if (button.getLabel().equals("Buy Navy1")) {
             
             getNavyIndex();
@@ -267,6 +265,8 @@ public class MyWorld extends World {
             addObject(new Button("Selected", 35), 450, 400);
             saveNavy();
                 
+        } else if (button.getLabel().equals("Main Menu")) {
+            goBackToMainMenu();
         }
     }
 
@@ -394,7 +394,7 @@ public class MyWorld extends World {
         } else {
             addObject(new Button("Select Navy2", 35), 450, 400);
         }
-        
+        addObject(new Button("Main Menu", 35), getWidth() / 2, getHeight() - 50);
         if (Greenfoot.mouseClicked(null)) {
                 
             checkButtonClicks();
@@ -508,4 +508,10 @@ public class MyWorld extends World {
         }
         
     }
+    private void goBackToMainMenu() {
+        
+        game_sound.stop();
+        Greenfoot.setWorld(new Fundal());
+        
+    }   
 }
