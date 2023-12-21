@@ -341,13 +341,13 @@ public class MyWorld extends World {
             
             String caleFisier = "scor.txt";
             File fisier = new File(caleFisier);
-    
+            BufferedWriter writer = new BufferedWriter(new FileWriter(fisier));
             if (!fisier.exists()) {
                 fisier.createNewFile();
+                writer.write(Integer.toString(get_score));
             }
     
             // Deschide BufferedWriter pentru a scrie în fișier
-            BufferedWriter writer = new BufferedWriter(new FileWriter(fisier));
     
             // Converteste scorul la String si scrie-l în fișier
             writer.write(Integer.toString(get_score + score_from_text));
@@ -403,8 +403,11 @@ public class MyWorld extends World {
         addObject(new Points(score_from_text), 150, 55);
         addObject(new Labels("Navy 1: 10000", 50), 150, 200);
         addObject(new Images("navy-1.png", 150, 115), 150, 300);
+        addObject(new Labels("+1 speed", 28), 270, 270);
         addObject(new Labels("Navy 2: 50000", 50), 450, 200);
         addObject(new Images("navy-2.png", 150, 115), 450, 300);
+        addObject(new Labels("+3 speed", 28), 550, 270);
+        addObject(new Labels("-5 bullet delay", 28), 573, 300);
         if (caracter_navy_index1 == 0) {
             addObject(new Button("Buy Navy1", 35), 150, 400);
         } else if ("navy1".equals(caracter_navy)) {

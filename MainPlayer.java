@@ -7,27 +7,31 @@ import java.io.*;
 public class MainPlayer extends Actor {
     
     String caracter_navy;
-    public int delay = 25;
+    public int delay = 30;
     public int double_time = 100;
-    
+    public int speed = 7;
     public MainPlayer() {
         getNavy();
         
         if ("default".equals(caracter_navy)) {
             
             GreenfootImage playerImage = new GreenfootImage("main-player.png");
+            speed = 7;
             setImage(playerImage);
             playerImage.scale(100, 100);
             
         } else if ("navy1".equals(caracter_navy)) {
             
             GreenfootImage playerImage = new GreenfootImage("navy-1.png");
+            speed = 8;
             setImage(playerImage);
             playerImage.scale(120, 100);
             
         } else if ("navy2".equals(caracter_navy)) {
             
             GreenfootImage playerImage = new GreenfootImage("navy-2.png");
+            speed = 10;
+            delay = 25;
             setImage(playerImage);
             playerImage.scale(140, 100);
             
@@ -38,16 +42,16 @@ public class MainPlayer extends Actor {
     public void act() {
         
         if (Greenfoot.isKeyDown("A")) {
-            move(-7); 
+            move(-speed); 
         }
         if (Greenfoot.isKeyDown("D")) {
-            move(7);  
+            move(speed);  
         }
         if (Greenfoot.isKeyDown("W")) {
-            setLocation(getX(), getY() - 7);  
+            setLocation(getX(), getY() - speed);  
         }
         if (Greenfoot.isKeyDown("S")) {
-            setLocation(getX(), getY() + 7); 
+            setLocation(getX(), getY() + speed); 
         }
         checkKeyPress();
     }
@@ -71,11 +75,23 @@ public class MainPlayer extends Actor {
         {
     
             doublefireBullet();
-            delay = 25; 
+            if ("navy2".equals(caracter_navy)) {
+                
+                delay = 25;
+                
+            } else {
+                delay = 30; 
+            }
         } else if (Greenfoot.isKeyDown("space") && delay == 0)
         {
             fireBullet();
-            delay = 25;  
+            if ("navy2".equals(caracter_navy)) {
+                
+                delay = 25;
+                
+            } else {
+                delay = 30; 
+            } 
         }
     }
 
