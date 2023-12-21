@@ -35,6 +35,8 @@ public class MyWorld extends World {
     public int x_misc = 80;
     public int y_misc = getHeight() - 50;
 
+    public int status = 1;
+    
     public MyWorld() {
         super(900, 600, 1);
         
@@ -68,7 +70,7 @@ public class MyWorld extends World {
         //game_misc = new GameMisc(get_hp, get_score, x_misc, y_misc);
         addObject(new Labels("Galaxy Impact", 65), getWidth() / 2, 50);
         addObject(new Button("Play", 50), getWidth() / 2, getHeight() - 100);
-        addObject(new Button("Exit", 50), getWidth() - 150, getHeight() - 100);
+        addObject(new Button("Status: " + status + "/3", 50), getWidth() - 150, getHeight() - 100);
         addObject(new Button("Shop", 50), getWidth() - 750, getHeight() - 100);
         if (!check_mute) {
             
