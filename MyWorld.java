@@ -12,6 +12,7 @@ public class MyWorld extends World {
     
     private boolean gameStarted = false;
     public boolean check_update = false;
+    boolean check_dpw = false;
     public int caracter_navy_index1 = 0;
     public int caracter_navy_index2 = 0;
     public boolean check_mute = false;
@@ -525,5 +526,22 @@ public class MyWorld extends World {
         game_sound.stop();
         Greenfoot.setWorld(new Fundal());
         
-    }   
+    } 
+   
+    public void dpw_true() {
+        
+        check_dpw = true;
+
+    }
+    public void dpw_false() {
+        
+        check_dpw = false;
+        
+    }
+
+    public boolean returnDoublepw() {
+        
+        return check_dpw;
+        
+    }
 }

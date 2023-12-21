@@ -27,9 +27,11 @@ public class DoublePw extends Actor
         }
         else if (isTouching(MainPlayer.class) && !isTouching(PlayerBullet.class)) {
             
+            myworld.dpw_true();
             get_power.play();
             getWorld().removeObject(this);
             removed = true;
+
         }
         
     }

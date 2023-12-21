@@ -8,6 +8,7 @@ public class MainPlayer extends Actor {
     
     String caracter_navy;
     public int delay = 25;
+    public int double_time = 100;
     
     public MainPlayer() {
         getNavy();
@@ -52,14 +53,29 @@ public class MainPlayer extends Actor {
     }
     private void checkKeyPress()
     {
+        MyWorld myworld = (MyWorld) getWorld();
         if (delay > 0) {
             delay--;
         }
+        if (double_time > 0 && myworld.returnDoublepw()) {
+            
+            double_time--;
+            
+        } else {
+            
+            myworld.dpw_false();
+            double_time = 100;
+            
+        }
+        if (Greenfoot.isKeyDown("space") && delay == 0 && myworld.returnDoublepw())
+        {
     
-        if (Greenfoot.isKeyDown("space") && delay == 0)
+            doublefireBullet();
+            delay = 25; 
+        } else if (Greenfoot.isKeyDown("space") && delay == 0)
         {
             fireBullet();
-            delay = 25;  // Resetăm delay după ce am tras un glonț
+            delay = 25;  
         }
     }
 
@@ -68,6 +84,14 @@ public class MainPlayer extends Actor {
     {
         PlayerBullet bullet = new PlayerBullet();
         getWorld().addObject(bullet, getX(), getY() - 30); // Adaugă bullet-ul deasupra player-ului
+    }
+    private void doublefireBullet()
+    {
+        PlayerBullet bullet1 = new PlayerBullet();
+        PlayerBullet bullet2 = new PlayerBullet();
+    
+        getWorld().addObject(bullet1, getX(), getY() - 30);
+        getWorld().addObject(bullet2, getX() + 10, getY() - 30);
     }
     
     public void getNavy() {
