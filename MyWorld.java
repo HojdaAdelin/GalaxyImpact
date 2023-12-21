@@ -84,6 +84,15 @@ public class MyWorld extends World {
         game_start_sound = new GreenfootSound("game-start.mp3");
         game_over_sound = new GreenfootSound("game-over.mp3");
         game_sound = new GreenfootSound("game.mp3");
+        
+        // Status & keys
+        
+        addObject(new Labels("W - move forward", 28), getWidth() - 125, getHeight() / 2 - 60);
+        addObject(new Labels("A - move left", 28), getWidth() - 150, getHeight() / 2 - 30);
+        addObject(new Labels("S - move backward", 28), getWidth() - 115, getHeight() / 2);
+        addObject(new Labels("D - move right", 28), getWidth() - 140, getHeight() / 2 + 30);
+        addObject(new Labels("SPACE - shoot", 28), getWidth() - 138, getHeight() / 2 + 60);
+        
     }
     
     public boolean gameOver = false;
