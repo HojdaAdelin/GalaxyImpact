@@ -27,6 +27,8 @@ public class MyWorld extends World {
     private int enemySpawnDelay = 60;
     private int power_up_timer = 0;
     private int power_up_delay = 600;
+    private int clear_power_up_timer = 0;
+    private int clear_power_up_delay = 800;
     public int get_hp = 100;
     public int get_score = 0;
     public int score_from_text;
@@ -276,6 +278,7 @@ public class MyWorld extends World {
     private void addNewEnemyWithTimer() {
         enemySpawnTimer++;
         power_up_timer++;
+        clear_power_up_timer++;
 
         if (enemySpawnTimer >= enemySpawnDelay) {
             Random rand = new Random();
@@ -292,6 +295,15 @@ public class MyWorld extends World {
             addObject(new DoublePw(), randomX, 0);
             
             power_up_timer = 0;
+            
+        }
+        if (clear_power_up_timer >= clear_power_up_delay) {
+            
+            Random rand = new Random();
+            int randomX = rand.nextInt(700);
+            addObject(new ClearPw(), randomX, 0);
+            
+            clear_power_up_timer = 0;
             
         }
     }
@@ -542,6 +554,15 @@ public class MyWorld extends World {
     public boolean returnDoublepw() {
         
         return check_dpw;
+        
+    }
+    public void clearPowerUp() {
+        
+        List<MainEnemy> enemy = getObjects(MainEnemy.class);
+        for (MainEnemy e : enemy) {
+            removeObject(e);
+            get_score += 50;
+        }
         
     }
 }

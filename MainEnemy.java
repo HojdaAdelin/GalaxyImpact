@@ -6,7 +6,7 @@ public class MainEnemy extends Actor {
     private int ySpeed = 1;
     private boolean removed = false;
     private int bulletSpawnTimer = 0;
-    private int bulletSpawnDelay = 85;
+    private int bulletSpawnDelay = 100;
     
     public MainEnemy() {
         fitt_in = new GreenfootSound("coll.mp3");
