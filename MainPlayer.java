@@ -10,17 +10,11 @@ public class MainPlayer extends Actor {
     public int delay = 30;
     public int double_time = 100;
     public int speed = 7;
+    UserInfo myInfo = UserInfo.getMyInfo();
     public MainPlayer() {
-        getNavy();
+        caracter_navy = myInfo.getString(1);
         
-        if ("default".equals(caracter_navy)) {
-            
-            GreenfootImage playerImage = new GreenfootImage("main-player.png");
-            speed = 7;
-            setImage(playerImage);
-            playerImage.scale(100, 100);
-            
-        } else if ("navy1".equals(caracter_navy)) {
+        if ("navy1".equals(caracter_navy)) {
             
             GreenfootImage playerImage = new GreenfootImage("navy-1.png");
             speed = 8;
@@ -34,6 +28,13 @@ public class MainPlayer extends Actor {
             delay = 25;
             setImage(playerImage);
             playerImage.scale(140, 100);
+            
+        } else {
+            
+            GreenfootImage playerImage = new GreenfootImage("main-player.png");
+            speed = 7;
+            setImage(playerImage);
+            playerImage.scale(100, 100);
             
         }
         
@@ -110,32 +111,5 @@ public class MainPlayer extends Actor {
         getWorld().addObject(bullet2, getX() + 10, getY() - 30);
     }
     
-    public void getNavy() {
-        
-        try {
-            
-            String caleFisier = "navy.txt";
-
-            
-            File fisier = new File(caleFisier);
-
-            
-            BufferedReader reader = new BufferedReader(new FileReader(fisier));
-
-            String linie;
-            
-            while ((linie = reader.readLine()) != null) {
-                
-                caracter_navy = linie;
-                
-            }
-
-            
-            reader.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
-    }
+    
 }

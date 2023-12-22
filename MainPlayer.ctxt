@@ -10,6 +10,4 @@ comment4.params=
 comment4.target=void\ fireBullet()
 comment5.params=
 comment5.target=void\ doublefireBullet()
-comment6.params=
-comment6.target=void\ getNavy()
-numComments=7
+numComments=6

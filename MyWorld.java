@@ -13,15 +13,17 @@ public class MyWorld extends World {
     private boolean gameStarted = false;
     public boolean check_update = false;
     boolean check_dpw = false;
-    public int caracter_navy_index1 = 0;
-    public int caracter_navy_index2 = 0;
+    
+    public int caracter_navy_index1;
+    public int caracter_navy_index2;
+    
     public boolean check_mute = false;
     public GreenfootSound game_start_sound;
     public GreenfootSound game_over_sound;
     public GreenfootSound game_sound;
     public MainPlayer player;
     public GameMisc game_misc;
-    String caracter_navy = "default";
+    String caracter_navy;
     
     private int enemySpawnTimer = 0;
     private int enemySpawnDelay = 60;
@@ -46,32 +48,13 @@ public class MyWorld extends World {
         getStatusA();
         
         player = new MainPlayer();
-        score_from_text = myInfo.getScore();
-        String caleFisier = "navy.txt";
-        String indexFisier = "navy_index.txt";
-        File misc = new File(caleFisier);
-        File index = new File(indexFisier);
-    
-        if (!misc.exists()) {
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(misc))) {
-                misc.createNewFile();
-                writer.write("default");
-                
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
-            }
-        }
-        if (!index.exists()) {
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(index))) {
-                index.createNewFile();
-                writer.write(Integer.toString(0) + "\n");
-                writer.write(Integer.toString(0));
-            } catch (IOException ioe) {
-                ioe.printStackTrace();
-            }
-        }   
         
-        //game_misc = new GameMisc(get_hp, get_score, x_misc, y_misc);
+        score_from_text = myInfo.getScore();
+        
+        // Set default navy/index
+        caracter_navy_index1 = myInfo.getInt(1);
+        caracter_navy_index2 = myInfo.getInt(2);
+        
         addObject(new Labels("Galaxy Impact", 65), getWidth() / 2, 50);
         addObject(new Button("Play", 50), getWidth() / 2, getHeight() - 100);
         addObject(new Button("Status: " + status + "/3", 50), getWidth() - 150, getHeight() - 100);
@@ -217,7 +200,7 @@ public class MyWorld extends World {
             
         } else if (button.getLabel().equals("Buy Navy1")) {
             
-            getNavyIndex();
+            caracter_navy_index1 = myInfo.getInt(1);
             List<Points> points = getObjects(Points.class);
             
             if (score_from_text >=  10000 && caracter_navy_index1 == 0) {
@@ -232,15 +215,15 @@ public class MyWorld extends World {
                 }
                 addObject(new Points(score_from_text), 150, 55);
                 caracter_navy = "navy1";
-                saveNavy();
                 caracter_navy_index1 = 1;
-                saveNavyIndex();
+                myInfo.setInt(1, caracter_navy_index1);
+                myInfo.store();
                 removeObject(button);
                 addObject(new Button("Select Navy1", 35), 150, 400);
             }
             
         } else if (button.getLabel().equals("Buy Navy2")) {
-            getNavyIndex();
+            caracter_navy_index2 = myInfo.getInt(2);
             List<Points> points = getObjects(Points.class);
             if (score_from_text >=  50000 && caracter_navy_index2 == 0) {
                 
@@ -254,9 +237,9 @@ public class MyWorld extends World {
                 }
                 addObject(new Points(score_from_text), 150, 55);
                 caracter_navy = "navy2";
-                saveNavy();
                 caracter_navy_index2 = 1;
-                saveNavyIndex();
+                myInfo.setInt(2, caracter_navy_index2);
+                myInfo.store();
                 removeObject(button);
                 addObject(new Button("Select Navy2", 35), 450, 400);
             } 
@@ -275,7 +258,8 @@ public class MyWorld extends World {
                 }
             }
             addObject(new Button("Selected", 35), 150, 400);
-            saveNavy();
+            myInfo.setString(1, "navy1");
+            myInfo.store();
                 
         } else if (button.getLabel().equals("Select Navy2")) {
                 
@@ -292,7 +276,8 @@ public class MyWorld extends World {
             }
             
             addObject(new Button("Selected", 35), 450, 400);
-            saveNavy();
+            myInfo.setString(1, "navy2");
+            myInfo.store();
                 
         } else if (button.getLabel().equals("Main Menu")) {
             goBackToMainMenu();
@@ -374,8 +359,9 @@ public class MyWorld extends World {
     
     public void Shop() {
         
-        getNavyIndex();
-        getNavy();
+        caracter_navy_index1 = myInfo.getInt(1);
+        caracter_navy_index2 = myInfo.getInt(2);
+        caracter_navy = myInfo.getString(1);
         addObject(new Labels("Soon!", 60), 750, getHeight() / 2);
         addObject(new Labels("Shop", 50), getWidth() / 2, 50);
         addObject(new Points(myInfo.getScore()), 150, 55);
@@ -410,110 +396,6 @@ public class MyWorld extends World {
         
     }
     
-    public void saveNavy() {
-        try {
-            
-            String caleFisier = "navy.txt";
-            File fisier = new File(caleFisier);
-    
-            if (!fisier.exists()) {
-                fisier.createNewFile();
-            }
-    
-            
-            BufferedWriter writer = new BufferedWriter(new FileWriter(fisier));
-    
-           
-            writer.write(caracter_navy);
-    
-            
-            writer.close();
-    
-            
-    
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    public void saveNavyIndex() {
-        try {
-            
-            String caleFisier = "navy_index.txt";
-            File fisier = new File(caleFisier);
-                       
-            BufferedWriter writer = new BufferedWriter(new FileWriter(fisier));
-        
-            writer.write(Integer.toString(caracter_navy_index1) + "\n");
-            writer.write(Integer.toString(caracter_navy_index2));
-                
-            writer.close();
-                
-            
-    
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    public void getNavyIndex() {
-        
-        try {
-            // Specifică calea către fișier
-            String caleFisier = "navy_index.txt";
-
-            // Crează un obiect File
-            File fisier = new File(caleFisier);
-
-            // Deschide BufferedReader pentru a citi din fișier
-            BufferedReader reader = new BufferedReader(new FileReader(fisier));
-
-            String linie;
-
-            
-            if ((linie = reader.readLine()) != null) {
-                caracter_navy_index1 = Integer.parseInt(linie);
-            }
-            
-            
-            if ((linie = reader.readLine()) != null) {
-                caracter_navy_index2 = Integer.parseInt(linie);
-            }
-
-            // Închide BufferedReader
-            reader.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
-    }
-    public void getNavy() {
-        
-        try {
-            
-            String caleFisier = "navy.txt";
-
-            
-            File fisier = new File(caleFisier);
-
-            
-            BufferedReader reader = new BufferedReader(new FileReader(fisier));
-
-            String linie;
-            
-            while ((linie = reader.readLine()) != null) {
-                
-                caracter_navy = linie;
-                
-            }
-
-            
-            reader.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
-    }
     private void goBackToMainMenu() {
         
         game_sound.stop();
