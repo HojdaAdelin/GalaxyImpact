@@ -39,11 +39,14 @@ public class MyWorld extends World {
     public int ctn_enemy = 0;
     public int max_enemy = 46;
     
+    UserInfo myInfo = UserInfo.getMyInfo();
+    
     public MyWorld() {
         super(900, 600, 1);
         getStatusA();
+        
         player = new MainPlayer();
-        getScore();
+        score_from_text = myInfo.getScore();
         String caleFisier = "navy.txt";
         String indexFisier = "navy_index.txt";
         File misc = new File(caleFisier);
@@ -83,7 +86,7 @@ public class MyWorld extends World {
             
         }
         
-        addObject(new Points(score_from_text), 125, 55);
+        addObject(new Points(myInfo.getScore()), 125, 55);
         game_start_sound = new GreenfootSound("game-start.mp3");
         game_over_sound = new GreenfootSound("game-over.mp3");
         game_sound = new GreenfootSound("game.mp3");
@@ -136,8 +139,9 @@ public class MyWorld extends World {
         } else {
             
             game_over_sound.play();
-            getScore();
-            saveScore();
+            score_from_text = myInfo.getScore();
+            myInfo.setScore(score_from_text + get_score);
+            myInfo.store();
             addObject(new GameOverMenu(get_score), getWidth() / 2, getHeight() / 2);
             Greenfoot.stop();
             
@@ -219,9 +223,10 @@ public class MyWorld extends World {
             if (score_from_text >=  10000 && caracter_navy_index1 == 0) {
                 
                 get_score = -10000;
-                saveScore();
+                myInfo.setScore(score_from_text + get_score);
+                myInfo.store();
                 get_score = 0;
-                getScore();
+                score_from_text = myInfo.getScore();
                 for (Points b : points) {
                     removeObject(b);
                 }
@@ -240,9 +245,10 @@ public class MyWorld extends World {
             if (score_from_text >=  50000 && caracter_navy_index2 == 0) {
                 
                 get_score = -50000;
-                saveScore();
+                myInfo.setScore(score_from_text + get_score);
+                myInfo.store();
                 get_score = 0;
-                getScore();
+                score_from_text = myInfo.getScore();
                 for (Points b : points) {
                     removeObject(b);
                 }
@@ -364,72 +370,15 @@ public class MyWorld extends World {
         check_update = true;
     }
     
-    // Save Score
-    public void saveScore() {
-        try {
-            
-            String caleFisier = "scor.txt";
-            File fisier = new File(caleFisier);
-            BufferedWriter writer = new BufferedWriter(new FileWriter(fisier));
-            if (!fisier.exists()) {
-                fisier.createNewFile();
-                writer.write(Integer.toString(get_score));
-            }
-    
-            // Deschide BufferedWriter pentru a scrie în fișier
-    
-            // Converteste scorul la String si scrie-l în fișier
-            writer.write(Integer.toString(get_score + score_from_text));
-    
-            // Închide BufferedWriter
-            writer.close();
-    
-            // System.out.println("Datele au fost scrise în fișier.");
-    
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    // Get Score
-    public void getScore() {
-        
-        try {
-            // Specifică calea către fișier
-            String caleFisier = "scor.txt";
-
-            // Crează un obiect File
-            File fisier = new File(caleFisier);
-
-            // Deschide BufferedReader pentru a citi din fișier
-            BufferedReader reader = new BufferedReader(new FileReader(fisier));
-
-            String linie;
-            // Citeste fiecare linie din fișier
-            while ((linie = reader.readLine()) != null) {
-                
-                score_from_text = Integer.parseInt(linie);
-                
-            }
-
-            // Închide BufferedReader
-            reader.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
-    }
-    
     // Shop
     
     public void Shop() {
         
-        getScore();
         getNavyIndex();
         getNavy();
         addObject(new Labels("Soon!", 60), 750, getHeight() / 2);
         addObject(new Labels("Shop", 50), getWidth() / 2, 50);
-        addObject(new Points(score_from_text), 150, 55);
+        addObject(new Points(myInfo.getScore()), 150, 55);
         addObject(new Labels("Navy 1: 10000", 50), 150, 200);
         addObject(new Images("navy-1.png", 150, 115), 150, 300);
         addObject(new Labels("+1 speed", 28), 270, 270);
