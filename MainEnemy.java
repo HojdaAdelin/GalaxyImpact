@@ -1,10 +1,12 @@
 import greenfoot.*; 
 import java.util.Random;
+import java.util.List;
 
 public class MainEnemy extends Actor {
     public GreenfootSound fitt_in;
     private int ySpeed = 1;
     private boolean removed = false;
+    private boolean remove_bullet = false;
     private int bulletSpawnTimer = 0;
     private int bulletSpawnDelay = 100;
     
@@ -34,6 +36,25 @@ public class MainEnemy extends Actor {
             
             getWorld().removeObject(this);
             myworld.increaseScore();
+            if (!remove_bullet) {
+                
+                int misc = 0;
+                List<PlayerBullet> bullet = myworld.getObjects(PlayerBullet.class);
+                for (PlayerBullet b : bullet) {
+                    
+                    myworld.removeObject(b);
+                    misc++;
+                    if (misc == 1) {
+                        
+                        misc = 0;
+                        break;
+                        
+                    }
+                    
+                }
+                remove_bullet = true;
+                
+            }
             removed = true;
           
         }

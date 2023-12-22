@@ -298,6 +298,16 @@ public class MyWorld extends World {
         power_up_timer++;
         clear_power_up_timer++;
 
+        if (ctn_enemy >= 36) {
+            
+            enemySpawnDelay = 25;
+            
+        } else if (ctn_enemy >= 23) {
+            
+            enemySpawnDelay = 40;
+            
+        }
+        
         if (enemySpawnTimer >= enemySpawnDelay) {
             Random rand = new Random();
             int randomX = rand.nextInt(700);
