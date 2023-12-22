@@ -39,10 +39,9 @@ public class MyWorld extends World {
     
     public MyWorld() {
         super(900, 600, 1);
-        
+        getStatusA();
         player = new MainPlayer();
         getScore();
-        
         String caleFisier = "navy.txt";
         String indexFisier = "navy_index.txt";
         File misc = new File(caleFisier);
@@ -576,6 +575,34 @@ public class MyWorld extends World {
         for (MainEnemy e : enemy) {
             removeObject(e);
             get_score += 50;
+        }
+        
+    }
+    public void getStatusA() {
+        
+        try {
+            
+            String caleFisier = "status.txt";
+
+            
+            File fisier = new File(caleFisier);
+
+            
+            BufferedReader reader = new BufferedReader(new FileReader(fisier));
+
+            String linie;
+            
+            while ((linie = reader.readLine()) != null) {
+                
+                status = Integer.parseInt(linie);
+                
+            }
+
+            
+            reader.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         
     }
