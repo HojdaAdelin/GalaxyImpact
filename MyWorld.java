@@ -36,6 +36,8 @@ public class MyWorld extends World {
     public int y_misc = getHeight() - 50;
 
     public int status = 1;
+    public int ctn_enemy = 0;
+    public int max_enemy = 46;
     
     public MyWorld() {
         super(900, 600, 1);
@@ -114,6 +116,11 @@ public class MyWorld extends World {
                 
                 if (check_update) {
                     
+                    List<Labels> label = getObjects(Labels.class);
+                    for (Labels b : label) {
+                        removeObject(b);
+                    }
+                    addObject(new Labels("Enemy: " + ctn_enemy + "/" + max_enemy, 30), 100, 50);
                     addObject(new GameMisc(get_hp, get_score, x_misc, y_misc), x_misc, y_misc);
                     check_update = false;
                     
@@ -169,6 +176,7 @@ public class MyWorld extends World {
             }
             game_start_sound.play();
             addObject(new MainPlayer(), getWidth() / 2, getHeight() - 100);
+            addObject(new Labels("Enemy: " + ctn_enemy + "/" + max_enemy, 30), 100, 50);
             addObject(new GameMisc(get_hp, get_score, x_misc, y_misc), x_misc, y_misc);
         } else if (button.getLabel().equals("Exit")) {
             System.out.println("Jocul a fost închis.");
@@ -342,6 +350,7 @@ public class MyWorld extends World {
     
     public void increaseScore() {
         get_score += 50;
+        ctn_enemy++;
         check_update = true;
     }
     
@@ -574,7 +583,9 @@ public class MyWorld extends World {
         List<MainEnemy> enemy = getObjects(MainEnemy.class);
         for (MainEnemy e : enemy) {
             removeObject(e);
+            ctn_enemy++;
             get_score += 50;
+            check_update = true;
         }
         
     }
