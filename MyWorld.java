@@ -45,11 +45,22 @@ public class MyWorld extends World {
     
     public MyWorld() {
         super(900, 600, 1);
-        getStatusA();
         
         player = new MainPlayer();
         
+        // Player score
         score_from_text = myInfo.getScore();
+        
+        // Status
+        if (myInfo.getInt(4) == 0) {
+            
+            status = 1;
+            
+        } else {
+            
+            status = myInfo.getInt(4);
+            
+        }
         
         // Set default navy/index
         caracter_navy_index1 = myInfo.getInt(1);
@@ -436,32 +447,5 @@ public class MyWorld extends World {
         }
         
     }
-    public void getStatusA() {
-        
-        try {
-            
-            String caleFisier = "status.txt";
-
-            
-            File fisier = new File(caleFisier);
-
-            
-            BufferedReader reader = new BufferedReader(new FileReader(fisier));
-
-            String linie;
-            
-            while ((linie = reader.readLine()) != null) {
-                
-                status = Integer.parseInt(linie);
-                
-            }
-
-            
-            reader.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
-    }
+    
 }

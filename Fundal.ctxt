@@ -2,6 +2,4 @@
 comment0.target=Fundal
 comment1.params=
 comment1.target=Fundal()
-comment2.params=
-comment2.target=void\ getStatus()
-numComments=3
+numComments=2

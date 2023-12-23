@@ -8,9 +8,23 @@ public class Fundal extends MyWorld
 {
     public Button button;
     public int status;
+    UserInfo myInfo = UserInfo.getMyInfo();
     public Fundal()
     {    
-        getStatus();
+        if (myInfo.getInt(4) == 0) {
+            
+            status = 1;
+            
+        } else if (myInfo.getInt(4) == 2) {
+            
+            status = 2;
+            
+        } else {
+            
+            status = 3;
+            
+        }
+       
         GreenfootImage backgroundImage = new GreenfootImage("main-menu.jpg");;
         if (status == 2) {
             
@@ -30,32 +44,5 @@ public class Fundal extends MyWorld
         setBackground(backgroundImage);
         
     }
-    public void getStatus() {
-        
-        try {
-            
-            String caleFisier = "status.txt";
-
-            
-            File fisier = new File(caleFisier);
-
-            
-            BufferedReader reader = new BufferedReader(new FileReader(fisier));
-
-            String linie;
-            
-            while ((linie = reader.readLine()) != null) {
-                
-                status = Integer.parseInt(linie);
-                
-            }
-
-            
-            reader.close();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
-    }
+    
 }
