@@ -6,11 +6,13 @@ import java.io.IOException;
 
 public class Fundal extends MyWorld
 {
-    public Button button;
+    // Status & informati baza de date
     public int status;
     UserInfo myInfo = UserInfo.getMyInfo();
+    
     public Fundal()
     {    
+        // Verificare status in baza de date
         if (myInfo.getInt(4) == 0) {
             
             status = 1;
@@ -25,6 +27,7 @@ public class Fundal extends MyWorld
             
         }
        
+        // Schimbare ecran pentru fiecare valoare a statusului
         GreenfootImage backgroundImage = new GreenfootImage("main-menu.jpg");;
         if (status == 2) {
             
@@ -40,6 +43,7 @@ public class Fundal extends MyWorld
             
         }
         
+        // Setare fundal
         backgroundImage.scale(getWidth(), getHeight());
         setBackground(backgroundImage);
         

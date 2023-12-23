@@ -2,10 +2,13 @@ import greenfoot.*;
 
 public class DoublePw extends Actor
 {
+    // Codul pentru utilitatea "double bullet"
     public GreenfootSound get_power;
     public int ySpeed = 2;
     private boolean removed = false;
+    
     public DoublePw() {
+        // Afisare
         get_power = new GreenfootSound("get-powerup.mp3");
         GreenfootImage enemyImage = new GreenfootImage("double-bullet-powerup.png");
         setImage(enemyImage);
@@ -15,7 +18,7 @@ public class DoublePw extends Actor
     
     public void act()
     {
-        
+        // Intalnirea cu actorul principal & y = 0
         MyWorld myworld = (MyWorld) getWorld();
         setLocation(getX(), getY() + ySpeed);
         if (getY() >= getWorld().getHeight() - 1) {

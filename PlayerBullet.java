@@ -2,6 +2,7 @@ import greenfoot.*;
 
 public class PlayerBullet extends MainPlayer
 {
+    // Codul pentru glontul actorului principal
     public GreenfootSound fire;
     private int xSpeed = 15;
     public PlayerBullet() {
@@ -16,6 +17,7 @@ public class PlayerBullet extends MainPlayer
     
     public void act()
     {
+        // Gestionare miscare
         MyWorld myworld = (MyWorld) getWorld();
         setLocation(getX(), getY() - xSpeed);
         if (getY() == 0) {

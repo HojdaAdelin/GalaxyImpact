@@ -6,12 +6,17 @@ import java.io.*;
 
 public class MainPlayer extends Actor {
     
+    // Codul pentru actorul principal
+    
     String caracter_navy;
     public int delay = 30;
     public int double_time = 100;
     public int speed = 7;
     UserInfo myInfo = UserInfo.getMyInfo();
     public MainPlayer() {
+        
+        // Verificare nava in baza de date
+        
         caracter_navy = myInfo.getString(1);
         
         if ("navy1".equals(caracter_navy)) {
@@ -42,6 +47,8 @@ public class MainPlayer extends Actor {
     
     public void act() {
         
+        // Miscarea actorului
+        
         if (Greenfoot.isKeyDown("A")) {
             move(-speed); 
         }
@@ -58,6 +65,7 @@ public class MainPlayer extends Actor {
     }
     private void checkKeyPress()
     {
+        // Utilitati & gestionarea glontului
         MyWorld myworld = (MyWorld) getWorld();
         if (delay > 0) {
             delay--;
@@ -96,12 +104,13 @@ public class MainPlayer extends Actor {
         }
     }
 
-
+    // Afisare glont
     private void fireBullet()
     {
         PlayerBullet bullet = new PlayerBullet();
         getWorld().addObject(bullet, getX(), getY() - 30); // Adaugă bullet-ul deasupra player-ului
     }
+    // Utilitatea "double bullet"
     private void doublefireBullet()
     {
         PlayerBullet bullet1 = new PlayerBullet();

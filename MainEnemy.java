@@ -3,6 +3,8 @@ import java.util.Random;
 import java.util.List;
 
 public class MainEnemy extends Actor {
+    // Codul pentru inamic
+    
     public GreenfootSound fitt_in;
     private int ySpeed = 1;
     private boolean removed = false;
@@ -11,6 +13,7 @@ public class MainEnemy extends Actor {
     private int bulletSpawnDelay = 100;
     
     public MainEnemy() {
+        // Afisare
         fitt_in = new GreenfootSound("coll.mp3");
         GreenfootImage enemyImage = new GreenfootImage("main-enemy.png");
         setImage(enemyImage);
@@ -18,11 +21,12 @@ public class MainEnemy extends Actor {
     }
 
     public void act() {   
-        // Mișcare în jos
+        // Mișcare în jos & instanta World
         MyWorld myworld = (MyWorld) getWorld();
         setLocation(getX(), getY() + ySpeed);
         addBullet();
-        // Verificare dacă a ajuns în partea de jos a ecranului și resetare poziție la partea de sus
+        // Verificare dacă a ajuns în partea de jos a ecranului
+        // Verificare intalnire cu actorul principal & glont principal
         if (getY() >= getWorld().getHeight() - 1) {
             
             if (!removed) {
@@ -66,7 +70,7 @@ public class MainEnemy extends Actor {
             removed = true;
         }
     }
-    
+    // Glont al inamicului
     public void addBullet() {
         
         bulletSpawnTimer++;
@@ -74,7 +78,6 @@ public class MainEnemy extends Actor {
             
             EnemyBullet bullet = new EnemyBullet();
             getWorld().addObject(bullet, getX(), getY() + 30);
-            // Resetăm timerul
             bulletSpawnTimer = 0;
         }
         

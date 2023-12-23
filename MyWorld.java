@@ -10,13 +10,17 @@ import java.io.BufferedWriter;
 
 public class MyWorld extends World {
     
+    // Verificari importante
     private boolean gameStarted = false;
     public boolean check_update = false;
     boolean check_dpw = false;
     
+    // Index pentru navele din magazin
     public int caracter_navy_index1;
     public int caracter_navy_index2;
+    String caracter_navy;
     
+    // Verificari joc, stare & declarari de muzici & actori
     public boolean check_mute = false;
     public boolean win = false;
     public GreenfootSound game_start_sound;
@@ -25,8 +29,8 @@ public class MyWorld extends World {
     public GreenfootSound game_sound;
     public MainPlayer player;
     public GameMisc game_misc;
-    String caracter_navy;
     
+    // Functionalitati 
     private int enemySpawnTimer = 0;
     private int enemySpawnDelay = 60;
     private int power_up_timer = 0;
@@ -38,11 +42,11 @@ public class MyWorld extends World {
     public int score_from_text;
     public int x_misc = 80;
     public int y_misc = getHeight() - 50;
-
     public int status = 1;
     public int ctn_enemy = 0;
     public int max_enemy = 46;
     
+    // Baza de date a jucatorului 
     UserInfo myInfo = UserInfo.getMyInfo();
     
     public MyWorld() {
@@ -50,9 +54,8 @@ public class MyWorld extends World {
         
         player = new MainPlayer();
         
-        // Player score
+        // Scor & status
         score_from_text = myInfo.getScore();
-        // Status
         if (myInfo.getInt(4) == 0) {
             
             status = 1;
@@ -67,14 +70,17 @@ public class MyWorld extends World {
             
         }
         
-        // Set default navy/index
+        // Verificare nave
         caracter_navy_index1 = myInfo.getInt(1);
         caracter_navy_index2 = myInfo.getInt(2);
         
+        // Butoane & Titlu
         addObject(new Labels("Galaxy Impact", 65), getWidth() / 2, 50);
         addObject(new Button("Play", 50), getWidth() / 2, getHeight() - 100);
         addObject(new Button("Status: " + status + "/3", 50), getWidth() - 150, getHeight() - 100);
         addObject(new Button("Shop", 50), getWidth() - 750, getHeight() - 100);
+        
+        // Setari muzica
         if (myInfo.getInt(3) == 0) {
             
             addObject(new Button("Mute music", 40), 775, 55);
@@ -85,14 +91,14 @@ public class MyWorld extends World {
             
         }
         
+        // Punctele & declarare muzici 
         addObject(new Points(myInfo.getScore()), 125, 55);
         game_start_sound = new GreenfootSound("game-start.mp3");
         game_over_sound = new GreenfootSound("game-over.mp3");
         game_sound = new GreenfootSound("game.mp3");
         win_game = new GreenfootSound("win.mp3");
         
-        // Status & keys
-        
+        // Controale
         addObject(new Labels("W - move forward", 28), getWidth() - 125, getHeight() / 2 - 60);
         addObject(new Labels("A - move left", 28), getWidth() - 150, getHeight() / 2 - 30);
         addObject(new Labels("S - move backward", 28), getWidth() - 115, getHeight() / 2);
@@ -101,23 +107,28 @@ public class MyWorld extends World {
         
     }
     
+    // Status joc
     public boolean gameOver = false;
     public void act() {
         
         if (!gameOver) {
             
+            // Verificare status muzica
             if (myInfo.getInt(3) == 0) {
                 game_sound.play();
             }
             if (Greenfoot.mouseClicked(null) && !gameOver) {
                 if (!gameStarted) {
+                    // Verificare actiuni
                     checkButtonClicks();
                     
                 }
             } 
             if (gameStarted && !gameOver) {
+                // Finalizare joc cu status de castigator
                 if (ctn_enemy >= 46) {
                     
+                    // Salvare status
                     int ante_status = myInfo.getInt(4);
                     ante_status++;
                     myInfo.setInt(4, ante_status);
@@ -127,9 +138,12 @@ public class MyWorld extends World {
                     
                     
                 }
+                // Oprire muzica daca este pornita
                 game_sound.stop();
+                // Adaugare inamici si utilitati
                 addNewEnemyWithTimer();
                 
+                // Actualizare pentru fiecare inamic omorat
                 if (check_update) {
                     
                     List<Labels> label = getObjects(Labels.class);
@@ -142,6 +156,7 @@ public class MyWorld extends World {
                     
                 }
             }
+            // Actualizare date pentru joc
             if (get_hp <= 0 && !gameOver) {
                 
                 gameStarted = false;
@@ -151,6 +166,7 @@ public class MyWorld extends World {
             
         } else {
             
+            // Verificare status final
             if (win) {
                 
                 win_game.play();
@@ -171,9 +187,8 @@ public class MyWorld extends World {
         }
     
     }
-    
-    // Alte metode existente...
 
+    // Actiune asupra butoanelor
     public void checkButtonClicks() {
         List<Button> buttons = getObjects(Button.class);
 
@@ -183,11 +198,13 @@ public class MyWorld extends World {
             }
         }
     }
-
+    
+    // Functionalitati butoane
     private void handleButtonClick(Button button) {
         if (button.getLabel().equals("Play")) {
-            gameStarted = true;
             
+            gameStarted = true;
+            // Stergere elemente
             List<Points> points = getObjects(Points.class);
                 for (Points p : points) {
                     removeObject(p);
@@ -201,14 +218,15 @@ public class MyWorld extends World {
             for (Button b : buttons) {
                 removeObject(b);
             }
+            // Incepere meci
             game_start_sound.play();
             addObject(new MainPlayer(), getWidth() / 2, getHeight() - 100);
             addObject(new Labels("Enemy: " + ctn_enemy + "/" + max_enemy, 30), 100, 50);
             addObject(new GameMisc(get_hp, get_score, x_misc, y_misc), x_misc, y_misc);
-        } else if (button.getLabel().equals("Exit")) {
-            System.out.println("Jocul a fost închis.");
+            
         } else if (button.getLabel().equals("Shop")) {
             
+            // Codul pentru magazin
             removeObject(button);
             
             List<Button> buttons = getObjects(Button.class);
@@ -228,6 +246,7 @@ public class MyWorld extends World {
             
         } else if (button.getLabel().equals("Mute music")) {
             
+            // Oprire muzica
             removeObject(button);
             addObject(new Button("Unmute music", 40), 775, 55);
             myInfo.setInt(3, 1);
@@ -236,6 +255,7 @@ public class MyWorld extends World {
             
         } else if (button.getLabel().equals("Unmute music")) {
             
+            // Pornire muzica
             removeObject(button);
             addObject(new Button("Mute music", 40), 775, 55);
             myInfo.setInt(3, 0);
@@ -244,6 +264,7 @@ public class MyWorld extends World {
             
         } else if (button.getLabel().equals("Buy Navy1")) {
             
+            // Codul pentru a cumpara nava 1 din magazin
             caracter_navy_index1 = myInfo.getInt(1);
             List<Points> points = getObjects(Points.class);
             
@@ -253,45 +274,56 @@ public class MyWorld extends World {
                 myInfo.setScore(score_from_text + get_score);
                 myInfo.store();
                 get_score = 0;
+                
                 score_from_text = myInfo.getScore();
                 for (Points b : points) {
                     removeObject(b);
                 }
+                
                 addObject(new Points(score_from_text), 150, 55);
                 caracter_navy = "navy1";
                 caracter_navy_index1 = 1;
                 myInfo.setInt(1, caracter_navy_index1);
                 myInfo.store();
                 removeObject(button);
+                
                 addObject(new Button("Select Navy1", 35), 150, 400);
             }
             
         } else if (button.getLabel().equals("Buy Navy2")) {
+            
+            // Codul pentru a cumpara nava 2 din magazin
             caracter_navy_index2 = myInfo.getInt(2);
             List<Points> points = getObjects(Points.class);
+            
             if (score_from_text >=  50000 && caracter_navy_index2 == 0) {
                 
                 get_score = -50000;
                 myInfo.setScore(score_from_text + get_score);
                 myInfo.store();
                 get_score = 0;
+                
                 score_from_text = myInfo.getScore();
                 for (Points b : points) {
                     removeObject(b);
                 }
+                
                 addObject(new Points(score_from_text), 150, 55);
                 caracter_navy = "navy2";
                 caracter_navy_index2 = 1;
                 myInfo.setInt(2, caracter_navy_index2);
                 myInfo.store();
                 removeObject(button);
+                
                 addObject(new Button("Select Navy2", 35), 450, 400);
             } 
                     
         } else if (button.getLabel().equals("Select Navy1")) {
-                
+            
+            // Codul pentru a selecta nava 1 & salvare in baza de date 
             caracter_navy = "navy1";
             removeObject(button);
+            
             List<Button> buttons = getObjects(Button.class);
             for (Button b : buttons) {
                 if (b.getLabel() == "Selected") {
@@ -301,14 +333,18 @@ public class MyWorld extends World {
                     
                 }
             }
+            
             addObject(new Button("Selected", 35), 150, 400);
+            // Salvarea in baza de date
             myInfo.setString(1, "navy1");
             myInfo.store();
                 
         } else if (button.getLabel().equals("Select Navy2")) {
                 
+            // Selectare nava 2 & salvare in baza de date
             caracter_navy = "navy2";
             removeObject(button);
+            
             List<Button> buttons = getObjects(Button.class);
             for (Button b : buttons) {
                 if (b.getLabel() == "Selected") {
@@ -320,19 +356,22 @@ public class MyWorld extends World {
             }
             
             addObject(new Button("Selected", 35), 450, 400);
+            // Salvare in baza de date
             myInfo.setString(1, "navy2");
             myInfo.store();
                 
         } else if (button.getLabel().equals("Main Menu")) {
+            // Instanta pentru meniu
             goBackToMainMenu();
         }
     }
 
     private void addNewEnemyWithTimer() {
+        // Incrementare inamici & utilitati
         enemySpawnTimer++;
         power_up_timer++;
         clear_power_up_timer++;
-
+        // Dificultate
         if (ctn_enemy >= 36) {
             
             enemySpawnDelay = 25;
@@ -342,7 +381,7 @@ public class MyWorld extends World {
             enemySpawnDelay = 40;
             
         }
-        
+        // Inamici
         if (enemySpawnTimer >= enemySpawnDelay) {
             Random rand = new Random();
             int randomX = rand.nextInt(700);
@@ -351,6 +390,7 @@ public class MyWorld extends World {
             
             enemySpawnTimer = 0;
         }
+        // Utilitati
         if (power_up_timer >= power_up_delay) {
             
             Random rand = new Random();
@@ -371,41 +411,36 @@ public class MyWorld extends World {
         }
     }
     
-    private void retryGame() {
-        // Implementează logica pentru a reseta jocul
-        // de exemplu, reinițializarea variabilelor și eliminarea obiectelor existente
-        // sau redeschiderea scenei de joc
-    }
-
-    private void goToMainMenu() {
-        // Implementează logica pentru a reveni la meniul principal
-        // de exemplu, înlocuirea scenei curente cu meniul principal
-    }
-    
+    // Contact cu inamicul
     public void decreaseHp() {
         get_hp -= 10;
         get_score += 50;
         check_update = true;
+        
     }
-    
+    // Contact cu glontul
     public void minHp() {
         get_hp -= 10;
         check_update = true;
+        
     }
-    
+    // Inamic neutralizat
     public void increaseScore() {
         get_score += 50;
         ctn_enemy++;
         check_update = true;
+        
     }
     
-    // Shop
-    
+    // Magazin
     public void Shop() {
         
+        // Date
         caracter_navy_index1 = myInfo.getInt(1);
         caracter_navy_index2 = myInfo.getInt(2);
         caracter_navy = myInfo.getString(1);
+        
+        // Elemente
         addObject(new Labels("Soon!", 60), 750, getHeight() / 2);
         addObject(new Labels("Shop", 50), getWidth() / 2, 50);
         addObject(new Points(myInfo.getScore()), 150, 55);
@@ -437,9 +472,9 @@ public class MyWorld extends World {
             
         } 
         
-        
     }
     
+    // Revenire la meniu
     private void goBackToMainMenu() {
         
         game_sound.stop();
@@ -447,6 +482,7 @@ public class MyWorld extends World {
         
     } 
    
+    // Functi pentru utilitatea "double bullet"
     public void dpw_true() {
         
         check_dpw = true;
@@ -457,12 +493,13 @@ public class MyWorld extends World {
         check_dpw = false;
         
     }
-
     public boolean returnDoublepw() {
         
         return check_dpw;
         
     }
+    
+    // Utilitatea stergere inamici prezenti pe ecran
     public void clearPowerUp() {
         
         List<MainEnemy> enemy = getObjects(MainEnemy.class);

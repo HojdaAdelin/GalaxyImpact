@@ -2,6 +2,7 @@ import greenfoot.*;
 
 public class Labels extends Actor
 {
+    // Codul pentru fiecare text din joc
     
     public Labels(String text, int size) {
         

@@ -3,6 +3,7 @@ import java.lang.*;
 
 public class GameMisc extends Actor
 {
+    // Codul pentru scor si viata in joc
     public int hp;
     public int score;
     public int x;
