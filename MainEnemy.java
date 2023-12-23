@@ -6,16 +6,29 @@ public class MainEnemy extends Actor {
     // Codul pentru inamic
     
     public GreenfootSound fitt_in;
+    public int enemy_type;
     private int ySpeed = 1;
     private boolean removed = false;
     private boolean remove_bullet = false;
     private int bulletSpawnTimer = 0;
     private int bulletSpawnDelay = 100;
+    UserInfo myInfo = UserInfo.getMyInfo();
     
     public MainEnemy() {
-        // Afisare
+        // Afisare in functie de tipul inamicului
+        GreenfootImage enemyImage = new GreenfootImage("main-enemy.png");;
+        if (myInfo.getInt(4) == 1) {
+            
+            enemyImage = new GreenfootImage("medium-enemy.png");
+            bulletSpawnDelay = 80;
+            
+        } else if (myInfo.getInt(4) == 2) {
+            
+            enemyImage = new GreenfootImage("hard-enemy.png");
+            bulletSpawnDelay = 90;
+            
+        }
         fitt_in = new GreenfootSound("coll.mp3");
-        GreenfootImage enemyImage = new GreenfootImage("main-enemy.png");
         setImage(enemyImage);
         enemyImage.scale(80, 60);
     }
@@ -24,7 +37,13 @@ public class MainEnemy extends Actor {
         // Mișcare în jos & instanta World
         MyWorld myworld = (MyWorld) getWorld();
         setLocation(getX(), getY() + ySpeed);
-        addBullet();
+        if (myInfo.getInt(4) == 2) {
+            
+            addBulletHard();
+            
+        } else {
+            addBullet();
+        }
         // Verificare dacă a ajuns în partea de jos a ecranului
         // Verificare intalnire cu actorul principal & glont principal
         if (getY() >= getWorld().getHeight() - 1) {
@@ -78,6 +97,20 @@ public class MainEnemy extends Actor {
             
             EnemyBullet bullet = new EnemyBullet();
             getWorld().addObject(bullet, getX(), getY() + 30);
+            bulletSpawnTimer = 0;
+        }
+        
+    }
+    public void addBulletHard() {
+        
+        EnemyBullet bullet1 = new EnemyBullet();
+        EnemyBullet bullet2 = new EnemyBullet();
+        
+        bulletSpawnTimer++;
+        if (bulletSpawnTimer >= bulletSpawnDelay) {
+            
+            getWorld().addObject(bullet1, getX() + 5, getY() + 30);
+            getWorld().addObject(bullet2, getX() - 5, getY() + 30);
             bulletSpawnTimer = 0;
         }
         

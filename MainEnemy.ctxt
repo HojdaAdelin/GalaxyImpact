@@ -6,4 +6,6 @@ comment2.params=
 comment2.target=void\ act()
 comment3.params=
 comment3.target=void\ addBullet()
-numComments=4
+comment4.params=
+comment4.target=void\ addBulletHard()
+numComments=5

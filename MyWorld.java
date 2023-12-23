@@ -53,7 +53,8 @@ public class MyWorld extends World {
         super(900, 600, 1);
         
         player = new MainPlayer();
-        
+        myInfo.setInt(4, 2);
+        myInfo.store();
         // Scor & status
         score_from_text = myInfo.getScore();
         if (myInfo.getInt(4) == 0) {
