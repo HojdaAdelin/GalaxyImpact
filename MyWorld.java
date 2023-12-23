@@ -59,7 +59,7 @@ public class MyWorld extends World {
         addObject(new Button("Play", 50), getWidth() / 2, getHeight() - 100);
         addObject(new Button("Status: " + status + "/3", 50), getWidth() - 150, getHeight() - 100);
         addObject(new Button("Shop", 50), getWidth() - 750, getHeight() - 100);
-        if (!check_mute) {
+        if (myInfo.getInt(3) == 0) {
             
             addObject(new Button("Mute music", 40), 775, 55);
             
@@ -89,7 +89,9 @@ public class MyWorld extends World {
         
         if (!gameOver) {
             
-            game_sound.play();
+            if (myInfo.getInt(3) == 0) {
+                game_sound.play();
+            }
             if (Greenfoot.mouseClicked(null) && !gameOver) {
                 if (!gameStarted) {
                     checkButtonClicks();
@@ -190,12 +192,16 @@ public class MyWorld extends World {
             
             removeObject(button);
             addObject(new Button("Unmute music", 40), 775, 55);
+            myInfo.setInt(3, 1);
+            myInfo.store();
             game_sound.setVolume(0);
             
         } else if (button.getLabel().equals("Unmute music")) {
             
             removeObject(button);
             addObject(new Button("Mute music", 40), 775, 55);
+            myInfo.setInt(3, 0);
+            myInfo.store();
             game_sound.setVolume(100);
             
         } else if (button.getLabel().equals("Buy Navy1")) {
