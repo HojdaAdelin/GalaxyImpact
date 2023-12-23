@@ -18,7 +18,9 @@ public class MyWorld extends World {
     public int caracter_navy_index2;
     
     public boolean check_mute = false;
+    public boolean win = false;
     public GreenfootSound game_start_sound;
+     public GreenfootSound win_game;
     public GreenfootSound game_over_sound;
     public GreenfootSound game_sound;
     public MainPlayer player;
@@ -50,15 +52,18 @@ public class MyWorld extends World {
         
         // Player score
         score_from_text = myInfo.getScore();
-        
         // Status
         if (myInfo.getInt(4) == 0) {
             
             status = 1;
             
+        } else if (myInfo.getInt(4) == 1) {
+            
+            status = 2;
+            
         } else {
             
-            status = myInfo.getInt(4);
+            status = 3;
             
         }
         
@@ -84,6 +89,7 @@ public class MyWorld extends World {
         game_start_sound = new GreenfootSound("game-start.mp3");
         game_over_sound = new GreenfootSound("game-over.mp3");
         game_sound = new GreenfootSound("game.mp3");
+        win_game = new GreenfootSound("win.mp3");
         
         // Status & keys
         
@@ -110,6 +116,17 @@ public class MyWorld extends World {
                 }
             } 
             if (gameStarted && !gameOver) {
+                if (ctn_enemy >= 46) {
+                    
+                    int ante_status = myInfo.getInt(4);
+                    ante_status++;
+                    myInfo.setInt(4, ante_status);
+                    myInfo.store();
+                    gameOver = true;
+                    win = true;
+                    
+                    
+                }
                 game_sound.stop();
                 addNewEnemyWithTimer();
                 
@@ -134,13 +151,23 @@ public class MyWorld extends World {
             
         } else {
             
-            game_over_sound.play();
-            score_from_text = myInfo.getScore();
-            myInfo.setScore(score_from_text + get_score);
-            myInfo.store();
-            addObject(new GameOverMenu(get_score), getWidth() / 2, getHeight() / 2);
-            Greenfoot.stop();
-            
+            if (win) {
+                
+                win_game.play();
+                score_from_text = myInfo.getScore();
+                myInfo.setScore(score_from_text + get_score);
+                myInfo.store();
+                addObject(new Labels("Chapter " + status + " clear", 60), getWidth() / 2, getHeight() / 2);
+                addObject(new Labels("Score: " + get_score, 60), getWidth() / 2, getHeight() / 2 + 80);
+                Greenfoot.stop();
+            } else {
+                game_over_sound.play();
+                score_from_text = myInfo.getScore();
+                myInfo.setScore(score_from_text + get_score);
+                myInfo.store();
+                addObject(new GameOverMenu(get_score), getWidth() / 2, getHeight() / 2);
+                Greenfoot.stop();
+            }
         }
     
     }

@@ -15,7 +15,7 @@ public class Fundal extends MyWorld
             
             status = 1;
             
-        } else if (myInfo.getInt(4) == 2) {
+        } else if (myInfo.getInt(4) == 1) {
             
             status = 2;
             
