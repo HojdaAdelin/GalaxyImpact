@@ -3,7 +3,7 @@ import greenfoot.*;
 public class WinInterface extends World
 {
 
-    // Codul pentru interfata joc finalizat
+    // Codul pentru interfata joc castigat
     UserInfo myInfo = UserInfo.getMyInfo();
     public WinInterface(int score, int chapter)
     {    

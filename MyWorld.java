@@ -33,7 +33,7 @@ public class MyWorld extends World {
     
     // Functionalitati 
     private int enemySpawnTimer = 0;
-    private int enemySpawnDelay = 60;
+    private int enemySpawnDelay = 55;
     private int power_up_timer = 0;
     private int power_up_delay = 600;
     private int clear_power_up_timer = 0;
@@ -67,6 +67,13 @@ public class MyWorld extends World {
         } else {
             
             status = 3;
+            
+        }
+        
+        // Hp mai mare pentru nava 3
+        if (myInfo.getInt(5) == 1) {
+            
+            get_hp = 150;
             
         }
         
@@ -133,6 +140,7 @@ public class MyWorld extends World {
                     ante_status++;
                     myInfo.setInt(4, ante_status);
                     myInfo.store();
+                    get_score += 3 * ante_status * 5000;
                     gameOver = true;
                     win = true;
                     
@@ -466,7 +474,7 @@ public class MyWorld extends World {
             
         } else if (ctn_enemy >= 23) {
             
-            enemySpawnDelay = 40;
+            enemySpawnDelay = 35;
             
         }
         // Inamici
@@ -542,8 +550,9 @@ public class MyWorld extends World {
         addObject(new Labels("-5 bullet delay", 28), 573, 300);
         addObject(new Labels("Navy 3: 50000", 50), 750, 200);
         addObject(new Images("navy-3.png", 140, 140), 750, 300);
-        addObject(new Labels("+5 speed", 28), 833, 270);
-        addObject(new Labels("-8 b. delay", 28), 840, 300);
+        addObject(new Labels("+50 hp", 28), 820, 240);
+        addObject(new Labels("+8 speed", 28), 833, 270);
+        addObject(new Labels("-10 b. delay", 28), 840, 300);
         if (caracter_navy_index1 == 0) {
             addObject(new Button("Buy Navy1", 35), 150, 400);
         } else if ("navy1".equals(caracter_navy)) {

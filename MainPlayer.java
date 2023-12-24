@@ -37,8 +37,8 @@ public class MainPlayer extends Actor {
         } else if ("navy3".equals(caracter_navy)) {
             
             GreenfootImage playerImage = new GreenfootImage("navy-3.png");
-            speed = 12;
-            delay = 22;
+            speed = 15;
+            delay = 20;
             setImage(playerImage);
             playerImage.scale(120, 120);
             
@@ -46,6 +46,7 @@ public class MainPlayer extends Actor {
             
             GreenfootImage playerImage = new GreenfootImage("main-player.png");
             speed = 7;
+            delay = 30;
             setImage(playerImage);
             playerImage.scale(100, 100);
             
@@ -98,7 +99,7 @@ public class MainPlayer extends Actor {
                 
             } else if ("navy3".equals(caracter_navy)) {
                 
-                delay = 22;
+                delay = 20;
                 
             }else {
                 delay = 30; 
@@ -112,7 +113,7 @@ public class MainPlayer extends Actor {
                 
             } else if ("navy3".equals(caracter_navy)) {
                 
-                delay = 22;
+                delay = 20;
                 
             } else {
                 delay = 30; 
