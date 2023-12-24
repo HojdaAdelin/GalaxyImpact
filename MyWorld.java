@@ -181,8 +181,8 @@ public class MyWorld extends World {
                 score_from_text = myInfo.getScore();
                 myInfo.setScore(score_from_text + get_score);
                 myInfo.store();
-                addObject(new GameOverMenu(get_score), getWidth() / 2, getHeight() / 2);
-                Greenfoot.stop();
+                Greenfoot.setWorld(new GameOver(get_score));
+                
             }
         }
     

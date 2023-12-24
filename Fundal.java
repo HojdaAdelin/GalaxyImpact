@@ -28,7 +28,7 @@ public class Fundal extends MyWorld
         }
        
         // Schimbare ecran pentru fiecare valoare a statusului
-        GreenfootImage backgroundImage = new GreenfootImage("main-menu.jpg");;
+        GreenfootImage backgroundImage = new GreenfootImage("main-menu.jpg");
         if (status == 2) {
             
             backgroundImage = new GreenfootImage("lvl2.jpg");
