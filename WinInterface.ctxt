@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=WinInterface
+comment1.params=score\ chapter
+comment1.target=WinInterface(int,\ int)
+comment2.params=
+comment2.target=void\ act()
+numComments=3

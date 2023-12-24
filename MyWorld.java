@@ -126,7 +126,7 @@ public class MyWorld extends World {
             } 
             if (gameStarted && !gameOver) {
                 // Finalizare joc cu status de castigator
-                if (ctn_enemy >= 46) {
+                if (ctn_enemy >= 46 && myInfo.getInt(4) != 2) {
                     
                     // Salvare status
                     int ante_status = myInfo.getInt(4);
@@ -173,9 +173,8 @@ public class MyWorld extends World {
                 score_from_text = myInfo.getScore();
                 myInfo.setScore(score_from_text + get_score);
                 myInfo.store();
-                addObject(new Labels("Chapter " + status + " clear", 60), getWidth() / 2, getHeight() / 2);
-                addObject(new Labels("Score: " + get_score, 60), getWidth() / 2, getHeight() / 2 + 80);
-                Greenfoot.stop();
+                Greenfoot.setWorld(new WinInterface(get_score, status));
+                
             } else {
                 game_over_sound.play();
                 score_from_text = myInfo.getScore();
