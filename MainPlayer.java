@@ -9,7 +9,7 @@ public class MainPlayer extends Actor {
     // Codul pentru actorul principal
     
     String caracter_navy;
-    public int delay = 30;
+    public int delay;
     public int double_time = 100;
     public int speed = 7;
     UserInfo myInfo = UserInfo.getMyInfo();
@@ -34,7 +34,15 @@ public class MainPlayer extends Actor {
             setImage(playerImage);
             playerImage.scale(140, 100);
             
-        } else {
+        } else if ("navy3".equals(caracter_navy)) {
+            
+            GreenfootImage playerImage = new GreenfootImage("navy-3.png");
+            speed = 12;
+            delay = 22;
+            setImage(playerImage);
+            playerImage.scale(120, 120);
+            
+        }else {
             
             GreenfootImage playerImage = new GreenfootImage("main-player.png");
             speed = 7;
@@ -88,7 +96,11 @@ public class MainPlayer extends Actor {
                 
                 delay = 25;
                 
-            } else {
+            } else if ("navy3".equals(caracter_navy)) {
+                
+                delay = 22;
+                
+            }else {
                 delay = 30; 
             }
         } else if (Greenfoot.isKeyDown("space") && delay == 0)
@@ -97,6 +109,10 @@ public class MainPlayer extends Actor {
             if ("navy2".equals(caracter_navy)) {
                 
                 delay = 25;
+                
+            } else if ("navy3".equals(caracter_navy)) {
+                
+                delay = 22;
                 
             } else {
                 delay = 30; 

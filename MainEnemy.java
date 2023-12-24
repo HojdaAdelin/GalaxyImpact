@@ -11,7 +11,7 @@ public class MainEnemy extends Actor {
     private boolean removed = false;
     private boolean remove_bullet = false;
     private int bulletSpawnTimer = 0;
-    private int bulletSpawnDelay = 100;
+    private int bulletSpawnDelay = 90;
     UserInfo myInfo = UserInfo.getMyInfo();
     
     public MainEnemy() {
@@ -20,12 +20,12 @@ public class MainEnemy extends Actor {
         if (myInfo.getInt(4) == 1) {
             
             enemyImage = new GreenfootImage("medium-enemy.png");
-            bulletSpawnDelay = 80;
+            bulletSpawnDelay = 70;
             
         } else if (myInfo.getInt(4) == 2) {
             
             enemyImage = new GreenfootImage("hard-enemy.png");
-            bulletSpawnDelay = 90;
+            bulletSpawnDelay = 70;
             
         }
         fitt_in = new GreenfootSound("coll.mp3");

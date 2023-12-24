@@ -18,6 +18,7 @@ public class MyWorld extends World {
     // Index pentru navele din magazin
     public int caracter_navy_index1;
     public int caracter_navy_index2;
+    public int caracter_navy_index3;
     String caracter_navy;
     
     // Verificari joc, stare & declarari de muzici & actori
@@ -53,8 +54,6 @@ public class MyWorld extends World {
         super(900, 600, 1);
         
         player = new MainPlayer();
-        myInfo.setInt(4, 2);
-        myInfo.store();
         // Scor & status
         score_from_text = myInfo.getScore();
         if (myInfo.getInt(4) == 0) {
@@ -297,9 +296,9 @@ public class MyWorld extends World {
             caracter_navy_index2 = myInfo.getInt(2);
             List<Points> points = getObjects(Points.class);
             
-            if (score_from_text >=  50000 && caracter_navy_index2 == 0) {
+            if (score_from_text >=  25000 && caracter_navy_index2 == 0) {
                 
-                get_score = -50000;
+                get_score = -25000;
                 myInfo.setScore(score_from_text + get_score);
                 myInfo.store();
                 get_score = 0;
@@ -319,18 +318,31 @@ public class MyWorld extends World {
                 addObject(new Button("Select Navy2", 35), 450, 400);
             } 
                     
-        } else if (button.getLabel().equals("Select Navy1")) {
+        }  else if (button.getLabel().equals("Select Navy1")) {
             
             // Codul pentru a selecta nava 1 & salvare in baza de date 
             caracter_navy = "navy1";
             removeObject(button);
-            
             List<Button> buttons = getObjects(Button.class);
             for (Button b : buttons) {
                 if (b.getLabel() == "Selected") {
                     
+                    if (myInfo.getInt(2) == 1) {
+                        
+                        removeObject(b);
+                        addObject(new Button("Select Navy2", 35), 450, 400);
+                        
+                    }
+                    if (myInfo.getInt(5) == 1) {
+                        
+                        removeObject(b);
+                        addObject(new Button("Select Navy3", 35), 750, 400);
+                        
+                    }
+                }
+                if (b.getLabel() == "Select Navy1") {
+                    
                     removeObject(b);
-                    addObject(new Button("Select Navy2", 35), 450, 400);
                     
                 }
             }
@@ -345,13 +357,26 @@ public class MyWorld extends World {
             // Selectare nava 2 & salvare in baza de date
             caracter_navy = "navy2";
             removeObject(button);
-            
             List<Button> buttons = getObjects(Button.class);
             for (Button b : buttons) {
                 if (b.getLabel() == "Selected") {
                     
+                    if (myInfo.getInt(1) == 1) {
+                        
+                        removeObject(b);
+                        addObject(new Button("Select Navy1", 35), 150, 400);
+                        
+                    }
+                    if (myInfo.getInt(5) == 1) {
+                        
+                        removeObject(b);
+                        addObject(new Button("Select Navy3", 35), 750, 400);
+                        
+                    }
+                }
+                if (b.getLabel() == "Select Navy2") {
+                    
                     removeObject(b);
-                    addObject(new Button("Select Navy1", 35), 150, 400);
                     
                 }
             }
@@ -364,7 +389,70 @@ public class MyWorld extends World {
         } else if (button.getLabel().equals("Main Menu")) {
             // Instanta pentru meniu
             goBackToMainMenu();
+        } else if (button.getLabel().equals("Buy Navy3")) {
+            
+            // Codul pentru a cumpara nava 3 din magazin
+            caracter_navy_index2 = myInfo.getInt(2);
+            List<Points> points = getObjects(Points.class);
+            
+            if (score_from_text >=  50000 && caracter_navy_index3 == 0) {
+                
+                get_score = -50000;
+                myInfo.setScore(score_from_text + get_score);
+                myInfo.store();
+                get_score = 0;
+                
+                score_from_text = myInfo.getScore();
+                for (Points b : points) {
+                    removeObject(b);
+                }
+                
+                addObject(new Points(score_from_text), 150, 55);
+                caracter_navy = "navy3";
+                caracter_navy_index3 = 1;
+                myInfo.setInt(5, caracter_navy_index3);
+                myInfo.store();
+                removeObject(button);
+                
+                addObject(new Button("Select Navy3", 35), 750, 400);
+            }
+        } else if (button.getLabel().equals("Select Navy3")) {
+                
+            // Selectare nava 3 & salvare in baza de date
+            caracter_navy = "navy3";
+            removeObject(button);
+            
+            List<Button> buttons = getObjects(Button.class);
+            for (Button b : buttons) {
+                if (b.getLabel() == "Selected") {
+                    
+                    if (myInfo.getInt(1) == 1) {
+                        
+                        removeObject(b);
+                        addObject(new Button("Select Navy1", 35), 150, 400);
+                        
+                    }
+                    if (myInfo.getInt(2) == 1) {
+                        
+                        removeObject(b);
+                        addObject(new Button("Select Navy2", 35), 450, 400);
+                        
+                    }
+                }
+                if (b.getLabel() == "Select Navy3") {
+                    
+                    removeObject(b);
+                    
+                }
+            }
+            
+            addObject(new Button("Selected", 35), 750, 400);
+            // Salvare in baza de date
+            myInfo.setString(1, "navy3");
+            myInfo.store();
+                
         }
+        
     }
 
     private void addNewEnemyWithTimer() {
@@ -439,19 +527,24 @@ public class MyWorld extends World {
         // Date
         caracter_navy_index1 = myInfo.getInt(1);
         caracter_navy_index2 = myInfo.getInt(2);
+        caracter_navy_index3 = myInfo.getInt(5);
         caracter_navy = myInfo.getString(1);
         
         // Elemente
-        addObject(new Labels("Soon!", 60), 750, getHeight() / 2);
+        
         addObject(new Labels("Shop", 50), getWidth() / 2, 50);
         addObject(new Points(myInfo.getScore()), 150, 55);
         addObject(new Labels("Navy 1: 10000", 50), 150, 200);
         addObject(new Images("navy-1.png", 150, 115), 150, 300);
         addObject(new Labels("+1 speed", 28), 270, 270);
-        addObject(new Labels("Navy 2: 50000", 50), 450, 200);
+        addObject(new Labels("Navy 2: 25000", 50), 450, 200);
         addObject(new Images("navy-2.png", 150, 115), 450, 300);
         addObject(new Labels("+3 speed", 28), 550, 270);
         addObject(new Labels("-5 bullet delay", 28), 573, 300);
+        addObject(new Labels("Navy 3: 50000", 50), 750, 200);
+        addObject(new Images("navy-3.png", 140, 140), 750, 300);
+        addObject(new Labels("+5 speed", 28), 833, 270);
+        addObject(new Labels("-8 b. delay", 28), 840, 300);
         if (caracter_navy_index1 == 0) {
             addObject(new Button("Buy Navy1", 35), 150, 400);
         } else if ("navy1".equals(caracter_navy)) {
@@ -465,6 +558,13 @@ public class MyWorld extends World {
             addObject(new Button("Selected", 35), 450, 400);
         } else {
             addObject(new Button("Select Navy2", 35), 450, 400);
+        }
+        if (caracter_navy_index3 == 0) {
+            addObject(new Button("Buy Navy3", 35), 750, 400);
+        } else if ("navy3".equals(caracter_navy)) {
+            addObject(new Button("Selected", 35), 750, 400);
+        } else {
+            addObject(new Button("Select Navy3", 35), 750, 400);
         }
         addObject(new Button("Main Menu", 40), getWidth() / 2, getHeight() - 50);
         if (Greenfoot.mouseClicked(null)) {
