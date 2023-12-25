@@ -145,6 +145,10 @@ public class MyWorld extends World {
                     win = true;
                     
                     
+                } else if (ctn_enemy >= 46 && myInfo.getInt(4) == 2) {
+                    
+                    
+                    
                 }
                 // Oprire muzica daca este pornita
                 game_sound.stop();
@@ -210,27 +214,39 @@ public class MyWorld extends World {
     private void handleButtonClick(Button button) {
         if (button.getLabel().equals("Play")) {
             
-            gameStarted = true;
-            // Stergere elemente
-            List<Points> points = getObjects(Points.class);
-                for (Points p : points) {
-                    removeObject(p);
+            if (myInfo.getInt(6) != 0 || myInfo.getInt(4) != 0) {
+                gameStarted = true;
+                // Stergere elemente
+                List<Points> points = getObjects(Points.class);
+                    for (Points p : points) {
+                        removeObject(p);
+                }
+                List<Labels> label = getObjects(Labels.class);
+                for (Labels b : label) {
+                    removeObject(b);
+                }
+                removeObject(button);
+                List<Button> buttons = getObjects(Button.class);
+                for (Button b : buttons) {
+                    removeObject(b);
+                }
+                // Incepere meci
+                game_start_sound.play();
+                addObject(new MainPlayer(), getWidth() / 2, getHeight() - 100);
+                addObject(new Labels("Enemy: " + ctn_enemy + "/" + max_enemy, 30), 100, 50);
+                addObject(new GameMisc(get_hp, get_score, x_misc, y_misc), x_misc, y_misc);
+            } else if (myInfo.getInt(6) == 0 && myInfo.getInt(4) == 0) {
+                
+                myInfo.setInt(6, 1);
+                myInfo.store();
+                Greenfoot.setWorld(new Story1());
+                if (myInfo.getInt(3) == 0) {
+                    
+                    game_sound.stop();
+                    
+                }
+                
             }
-            List<Labels> label = getObjects(Labels.class);
-            for (Labels b : label) {
-                removeObject(b);
-            }
-            removeObject(button);
-            List<Button> buttons = getObjects(Button.class);
-            for (Button b : buttons) {
-                removeObject(b);
-            }
-            // Incepere meci
-            game_start_sound.play();
-            addObject(new MainPlayer(), getWidth() / 2, getHeight() - 100);
-            addObject(new Labels("Enemy: " + ctn_enemy + "/" + max_enemy, 30), 100, 50);
-            addObject(new GameMisc(get_hp, get_score, x_misc, y_misc), x_misc, y_misc);
-            
         } else if (button.getLabel().equals("Shop")) {
             
             // Codul pentru magazin
