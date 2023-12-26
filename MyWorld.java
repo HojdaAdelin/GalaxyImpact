@@ -29,16 +29,16 @@ public class MyWorld extends World {
     public GreenfootSound game_over_sound;
     public GreenfootSound game_sound;
     public MainPlayer player;
-    public GameMisc game_misc;
     
     // Functionalitati 
     private int enemySpawnTimer = 0;
-    private int enemySpawnDelay = 55;
+    private int enemySpawnDelay = 60;
     private int power_up_timer = 0;
     private int power_up_delay = 600;
     private int clear_power_up_timer = 0;
     private int clear_power_up_delay = 800;
-    public int get_hp = 100;
+    public int max_hp;
+    public int get_hp;
     public int get_score = 0;
     public int score_from_text;
     public int x_misc = 80;
@@ -71,10 +71,12 @@ public class MyWorld extends World {
         }
         
         // Hp mai mare pentru nava 3
-        if (myInfo.getInt(5) == 1) {
-            
+        if ("navy3".equals(myInfo.getString(1))) {
+            max_hp = 150;
             get_hp = 150;
-            
+        } else {
+            max_hp = 100;
+            get_hp = 100;
         }
         
         // Verificare nave
@@ -133,7 +135,7 @@ public class MyWorld extends World {
             } 
             if (gameStarted && !gameOver) {
                 // Finalizare joc cu status de castigator
-                if (ctn_enemy >= 46 && myInfo.getInt(4) != 2) {
+                if (ctn_enemy >= max_enemy && myInfo.getInt(4) != 2) {
                     
                     // Salvare status
                     int ante_status = myInfo.getInt(4);
@@ -145,9 +147,12 @@ public class MyWorld extends World {
                     win = true;
                     
                     
-                } else if (ctn_enemy >= 46 && myInfo.getInt(4) == 2) {
+                } else if (ctn_enemy >= max_enemy && myInfo.getInt(4) == 2) {
                     
-                    
+                    int ante_status = myInfo.getInt(4);
+                    get_score += 3 * ante_status * 5000;
+                    gameOver = true;
+                    win = true;
                     
                 }
                 // Oprire muzica daca este pornita
@@ -163,7 +168,7 @@ public class MyWorld extends World {
                         removeObject(b);
                     }
                     addObject(new Labels("Enemy: " + ctn_enemy + "/" + max_enemy, 30), 100, 50);
-                    addObject(new GameMisc(get_hp, get_score, x_misc, y_misc), x_misc, y_misc);
+                    addObject(new Labels("Score: " + get_score + "\n" + "HP: " + get_hp + "/" + max_hp, 30), x_misc, y_misc);
                     check_update = false;
                     
                 }
@@ -234,7 +239,8 @@ public class MyWorld extends World {
                 game_start_sound.play();
                 addObject(new MainPlayer(), getWidth() / 2, getHeight() - 100);
                 addObject(new Labels("Enemy: " + ctn_enemy + "/" + max_enemy, 30), 100, 50);
-                addObject(new GameMisc(get_hp, get_score, x_misc, y_misc), x_misc, y_misc);
+                addObject(new Labels("Score: " + get_score + "\n" + "HP: " + get_hp + "/" + max_hp, 30), x_misc, y_misc);
+                        
             } else if (myInfo.getInt(6) == 0 && myInfo.getInt(4) == 0) {
                 
                 myInfo.setInt(6, 1);
@@ -369,7 +375,8 @@ public class MyWorld extends World {
                     
                 }
             }
-            
+            max_hp = 100;
+            get_hp = 100;
             addObject(new Button("Selected", 35), 150, 400);
             // Salvarea in baza de date
             myInfo.setString(1, "navy1");
@@ -403,7 +410,8 @@ public class MyWorld extends World {
                     
                 }
             }
-            
+            max_hp = 100;
+            get_hp = 100;
             addObject(new Button("Selected", 35), 450, 400);
             // Salvare in baza de date
             myInfo.setString(1, "navy2");
@@ -468,7 +476,8 @@ public class MyWorld extends World {
                     
                 }
             }
-            
+            max_hp = 150;
+            get_hp = 150;
             addObject(new Button("Selected", 35), 750, 400);
             // Salvare in baza de date
             myInfo.setString(1, "navy3");
@@ -486,11 +495,11 @@ public class MyWorld extends World {
         // Dificultate
         if (ctn_enemy >= 36) {
             
-            enemySpawnDelay = 25;
+            enemySpawnDelay = 30;
             
         } else if (ctn_enemy >= 23) {
             
-            enemySpawnDelay = 35;
+            enemySpawnDelay = 40;
             
         }
         // Inamici

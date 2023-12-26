@@ -20,12 +20,12 @@ public class MainEnemy extends Actor {
         if (myInfo.getInt(4) == 1) {
             
             enemyImage = new GreenfootImage("medium-enemy.png");
-            bulletSpawnDelay = 50;
+            bulletSpawnDelay = 55;
             
         } else if (myInfo.getInt(4) == 2) {
             
             enemyImage = new GreenfootImage("hard-enemy.png");
-            bulletSpawnDelay = 45;
+            bulletSpawnDelay = 50;
             ySpeed = 1;
             
         }

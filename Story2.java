@@ -1,20 +1,18 @@
 import greenfoot.*; 
 
-public class WinInterface extends World
+public class Story2 extends World
 {
-
-    // Codul pentru interfata joc castigat
+    // Codul pentru povestea 2
     UserInfo myInfo = UserInfo.getMyInfo();
-    public WinInterface(int score, int chapter)
+    public Story2()
     {    
         super(900, 600, 1);
         GreenfootImage backgroundImage = new GreenfootImage("main-menu.jpg");
-        int status = myInfo.getInt(4) - 1;
-        if (status == 1) {
+        if (myInfo.getInt(4) == 1) {
             
             backgroundImage = new GreenfootImage("lvl2.jpg");
             
-        } else if (status == 2) {
+        } else if (myInfo.getInt(4) == 2) {
             
             backgroundImage = new GreenfootImage("background.jpg");
             
@@ -24,8 +22,8 @@ public class WinInterface extends World
             
         }
         // Elemente si afisare imagine
-        addObject(new Labels("Chapter " + chapter + " clear", 60), getWidth() / 2, getHeight() / 2 - 30);
-        addObject(new Labels("Score: " + score, 60), getWidth() / 2, getHeight() / 2 + 30);
+        addObject(new Labels("Story", 70), getWidth() / 2, 50);
+        addObject(new Labels("Now Melvin has become invincible.\n He destroyed the enemies and now he is the king of the galaxy.\n Melvin is grateful for your help.", 30), getWidth() / 2, 150);
         backgroundImage.scale(getWidth(), getHeight());
         setBackground(backgroundImage);
         
@@ -35,15 +33,8 @@ public class WinInterface extends World
     }
     public void act() {
         if (Greenfoot.mouseClicked(this)) {
-            if (myInfo.getInt(7) == 0 && myInfo.getInt(4) == 2) {
-                
-                Greenfoot.setWorld(new Story2());
-                myInfo.setInt(7, 1);
-                myInfo.store();
-                
-            } else {
-                Greenfoot.setWorld(new Fundal());
-            }
+            
+            Greenfoot.setWorld(new Fundal());
         }
     }
 }

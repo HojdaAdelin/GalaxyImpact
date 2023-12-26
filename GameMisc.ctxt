@@ -1,7 +1,0 @@
-#BlueJ class context
-comment0.target=GameMisc
-comment1.params=hp\ score\ x\ y
-comment1.target=GameMisc(int,\ int,\ int,\ int)
-comment2.params=
-comment2.target=void\ act()
-numComments=3
