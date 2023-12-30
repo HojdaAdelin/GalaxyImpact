@@ -52,7 +52,11 @@ public class MyWorld extends World {
     
     public MyWorld() {
         super(900, 600, 1);
-        
+        if (!UserInfo.isStorageAvailable()) {
+            
+            Greenfoot.setWorld(new VerifyLogIn());
+            
+        }
         player = new MainPlayer();
         // Scor & status
         score_from_text = myInfo.getScore();
@@ -100,10 +104,10 @@ public class MyWorld extends World {
             addObject(new Button("Unmute music", 40), 775, 55);
             
         }
-        
         // Punctele & declarare muzici 
         addObject(new Points(myInfo.getScore()), 125, 60);
         addObject(new Labels("Best score:" + Integer.toString(myInfo.getInt(9)), 35), 130, 95);
+        
         game_start_sound = new GreenfootSound("game-start.mp3");
         game_over_sound = new GreenfootSound("game-over.mp3");
         game_sound = new GreenfootSound("game.mp3");
