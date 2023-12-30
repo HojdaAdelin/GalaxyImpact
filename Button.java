@@ -20,10 +20,11 @@ public class Button extends Actor {
 
     // Verificare hover
     private boolean checkHover() {
-        MyWorld myWorld = (MyWorld) getWorld();
+        World world = getWorld();
         MouseInfo mouse = Greenfoot.getMouseInfo();
     
-        if (mouse != null && myWorld != null) {
+        if (world != null && world instanceof MyWorld && mouse != null) {
+            MyWorld myWorld = (MyWorld) world;
             GreenfootImage normalImage = new GreenfootImage(label, size, Color.WHITE, new Color(150, 150, 150, 0));
             List objects = myWorld.getObjectsAt(mouse.getX(), mouse.getY(), Button.class);
     
@@ -36,6 +37,7 @@ public class Button extends Actor {
         
         return false;
     }
+
 
 
     
