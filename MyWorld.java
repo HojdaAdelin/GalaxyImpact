@@ -102,7 +102,6 @@ public class MyWorld extends World {
         }
         
         // Punctele & declarare muzici 
-        myInfo.setInt(9, 0);
         addObject(new Points(myInfo.getScore()), 125, 60);
         addObject(new Labels("Best score:" + Integer.toString(myInfo.getInt(9)), 35), 130, 95);
         game_start_sound = new GreenfootSound("game-start.mp3");
@@ -184,6 +183,11 @@ public class MyWorld extends World {
                 
                 win_game.play();
                 score_from_text = myInfo.getScore();
+                if (get_score > myInfo.getInt(9)) {
+                    
+                    myInfo.setInt(9, get_score);
+                    myInfo.store();
+                }
                 myInfo.setScore(score_from_text + get_score);
                 myInfo.store();
                 Greenfoot.setWorld(new WinInterface(get_score, status));
@@ -191,6 +195,11 @@ public class MyWorld extends World {
             } else {
                 game_over_sound.play();
                 score_from_text = myInfo.getScore();
+                if (get_score > myInfo.getInt(9)) {
+                    
+                    myInfo.setInt(9, get_score);
+                    myInfo.store();
+                }
                 myInfo.setScore(score_from_text + get_score);
                 myInfo.store();
                 Greenfoot.setWorld(new GameOver(get_score));
