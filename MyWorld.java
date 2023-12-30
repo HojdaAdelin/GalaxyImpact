@@ -85,9 +85,10 @@ public class MyWorld extends World {
         
         // Butoane & Titlu
         addObject(new Labels("Galaxy Impact", 65), getWidth() / 2, 50);
-        addObject(new Button("Play", 50), getWidth() / 2, getHeight() - 100);
-        addObject(new Button("Status: " + status + "/3", 50), getWidth() - 150, getHeight() - 100);
-        addObject(new Button("Shop", 50), getWidth() - 750, getHeight() - 100);
+        addObject(new Button("Play", 45), getWidth() / 2, getHeight() - 100);
+        addObject(new Button("Status: " + status + "/3", 45), getWidth() - 150, getHeight() - 100);
+        addObject(new Button("Shop", 45), getWidth() - 750, getHeight() - 100);
+        addObject(new Button("How to play", 45), getWidth() / 2, getHeight() - 40);
         
         // Setari muzica
         if (myInfo.getInt(3) == 0) {
@@ -108,14 +109,7 @@ public class MyWorld extends World {
         game_over_sound = new GreenfootSound("game-over.mp3");
         game_sound = new GreenfootSound("game.mp3");
         win_game = new GreenfootSound("win.mp3");
-        
-        // Controale
-        addObject(new Labels("W - move forward", 28), 135, getHeight() / 2 - 20);
-        addObject(new Labels("A - move left", 28), 110, getHeight() / 2 + 10);
-        addObject(new Labels("S - move backward", 28), 145, getHeight() / 2 + 40);
-        addObject(new Labels("D - move right", 28), 117, getHeight() / 2 + 70);
-        addObject(new Labels("SPACE - shoot", 28), 120, getHeight() / 2 + 100);
-        
+    
     }
     
     // Status joc
@@ -284,7 +278,12 @@ public class MyWorld extends World {
             myInfo.store();
             game_sound.setVolume(0);
             
-        } else if (button.getLabel().equals("Unmute music")) {
+        } else if (button.getLabel().equals("How to play")) {
+            
+            game_sound.stop();
+            Greenfoot.setWorld(new Keys());
+            
+        }else if (button.getLabel().equals("Unmute music")) {
             
             // Pornire muzica
             removeObject(button);
