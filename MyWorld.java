@@ -101,18 +101,20 @@ public class MyWorld extends World {
         }
         
         // Punctele & declarare muzici 
-        addObject(new Points(myInfo.getScore()), 125, 55);
+        myInfo.setInt(9, 0);
+        addObject(new Points(myInfo.getScore()), 125, 60);
+        addObject(new Labels("Best score:" + Integer.toString(myInfo.getInt(9)), 35), 130, 95);
         game_start_sound = new GreenfootSound("game-start.mp3");
         game_over_sound = new GreenfootSound("game-over.mp3");
         game_sound = new GreenfootSound("game.mp3");
         win_game = new GreenfootSound("win.mp3");
         
         // Controale
-        addObject(new Labels("W - move forward", 28), getWidth() - 125, getHeight() / 2 - 60);
-        addObject(new Labels("A - move left", 28), getWidth() - 150, getHeight() / 2 - 30);
-        addObject(new Labels("S - move backward", 28), getWidth() - 115, getHeight() / 2);
-        addObject(new Labels("D - move right", 28), getWidth() - 140, getHeight() / 2 + 30);
-        addObject(new Labels("SPACE - shoot", 28), getWidth() - 138, getHeight() / 2 + 60);
+        addObject(new Labels("W - move forward", 28), 135, getHeight() / 2 - 20);
+        addObject(new Labels("A - move left", 28), 110, getHeight() / 2 + 10);
+        addObject(new Labels("S - move backward", 28), 145, getHeight() / 2 + 40);
+        addObject(new Labels("D - move right", 28), 117, getHeight() / 2 + 70);
+        addObject(new Labels("SPACE - shoot", 28), 120, getHeight() / 2 + 100);
         
     }
     
