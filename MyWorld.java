@@ -52,7 +52,8 @@ public class MyWorld extends World {
     
     public MyWorld() {
         super(900, 600, 1);
-        if (!UserInfo.isStorageAvailable()) {
+        // Verificare date user
+        if (!myInfo.isStorageAvailable()) {
             
             Greenfoot.setWorld(new VerifyLogIn());
             
