@@ -5,9 +5,24 @@ public class EnemyBullet extends MainEnemy
     // Codul pentru glont inamic
     private int xSpeed = 5;
     private boolean removed = false;
-    
+    UserInfo myInfo = UserInfo.getMyInfo();
     public EnemyBullet() {
         
+        if (myInfo.getInt(4) == 0) {
+            
+            xSpeed = 5;
+            
+        }
+        
+        else if (myInfo.getInt(4) == 1) {
+            
+            xSpeed = 6;
+            
+        } else {
+            
+            xSpeed = 8;
+            
+        }
         GreenfootImage bullet = new GreenfootImage("enemy_bullet.png");
         setImage(bullet);
         bullet.scale(50, 100);

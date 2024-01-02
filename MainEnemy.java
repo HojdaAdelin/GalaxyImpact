@@ -44,13 +44,7 @@ public class MainEnemy extends Actor {
         // Mișcare în jos & instanta World
         MyWorld myworld = (MyWorld) getWorld();
         setLocation(getX(), getY() + ySpeed);
-        if (myInfo.getInt(4) < 2) {
-            
-            addBullet();
-            
-        } else {
-            addBulletHard();
-        }
+        addBullet();
         // Verificare dacă a ajuns în partea de jos a ecranului
         // Verificare intalnire cu actorul principal & glont principal
         if (getY() >= getWorld().getHeight() - 1) {
@@ -104,20 +98,6 @@ public class MainEnemy extends Actor {
             
             EnemyBullet bullet = new EnemyBullet();
             getWorld().addObject(bullet, getX(), getY() + 30);
-            bulletSpawnTimer = 0;
-        }
-        
-    }
-    public void addBulletHard() {
-        
-        EnemyBullet bullet1 = new EnemyBullet();
-        EnemyBullet bullet2 = new EnemyBullet();
-        
-        bulletSpawnTimer++;
-        if (bulletSpawnTimer >= bulletSpawnDelay) {
-            
-            getWorld().addObject(bullet1, getX() + 5, getY() + 30);
-            getWorld().addObject(bullet2, getX() - 5, getY() + 30);
             bulletSpawnTimer = 0;
         }
         

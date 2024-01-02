@@ -42,14 +42,18 @@ public class Button extends Actor {
         return false;
     }
 
-
-
-    
+    boolean verify = true;
     private void updateImage() {
         
         if (checkHover()) {
             
-            hover.play();
+            if (verify) {
+                
+                hover.play();
+                verify = false;
+                
+            }
+            
             GreenfootImage hoverImage = new GreenfootImage(label, size, Color.LIGHT_GRAY, new Color(150, 150, 150, 0));
             setImage(hoverImage);
             
@@ -57,7 +61,7 @@ public class Button extends Actor {
             
             GreenfootImage normalImage = new GreenfootImage(label, size, Color.WHITE, new Color(150, 150, 150, 0));
             setImage(normalImage);
-            
+            verify = true;
         }
            
     }
