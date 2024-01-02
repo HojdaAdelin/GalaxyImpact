@@ -3,24 +3,26 @@ import greenfoot.*;
 public class WinInterface extends World
 {
 
-    // Codul pentru interfata joc castigat
+    // Codul pentru interfata joc castiga
+
     UserInfo myInfo = UserInfo.getMyInfo();
     public WinInterface(int score, int chapter)
     {    
         super(900, 600, 1);
         GreenfootImage backgroundImage = new GreenfootImage("main-menu.jpg");
         int status = myInfo.getInt(4) - 1;
-        if (status == 1) {
+        if (status == 0) {
+            
+            backgroundImage = new GreenfootImage("main-menu.jpg");
+            
+        }
+        else if (status == 1) {
             
             backgroundImage = new GreenfootImage("lvl2.jpg");
             
-        } else if (status == 2) {
+        } else{
             
             backgroundImage = new GreenfootImage("background.jpg");
-            
-        } else {
-            
-            backgroundImage = new GreenfootImage("main-menu.jpg");
             
         }
         // Elemente si afisare imagine
@@ -35,7 +37,7 @@ public class WinInterface extends World
     }
     public void act() {
         if (Greenfoot.mouseClicked(this)) {
-            if (myInfo.getInt(7) == 0 && myInfo.getInt(4) == 2) {
+            if (myInfo.getInt(7) == 0 && myInfo.getInt(4) == 3) {
                 
                 Greenfoot.setWorld(new Story2());
                 myInfo.setInt(7, 1);

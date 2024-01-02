@@ -8,17 +8,18 @@ public class GameOver extends World
     {    
         super(900, 600, 1);
         GreenfootImage backgroundImage = new GreenfootImage("main-menu.jpg");
-        if (myInfo.getInt(4) == 1) {
+        if (myInfo.getInt(4) == 0) {
+            
+            backgroundImage = new GreenfootImage("main-menu.jpg");
+            
+        }
+        else if (myInfo.getInt(4) == 1) {
             
             backgroundImage = new GreenfootImage("lvl2.jpg");
             
-        } else if (myInfo.getInt(4) == 2) {
+        } else{
             
             backgroundImage = new GreenfootImage("background.jpg");
-            
-        } else {
-            
-            backgroundImage = new GreenfootImage("main-menu.jpg");
             
         }
         // Elemente si afisare imagine

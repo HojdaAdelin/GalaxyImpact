@@ -28,6 +28,7 @@ public class MyWorld extends World {
      public GreenfootSound win_game;
     public GreenfootSound game_over_sound;
     public GreenfootSound game_sound;
+    public GreenfootSound click;
     public MainPlayer player;
     
     // Functionalitati 
@@ -91,7 +92,7 @@ public class MyWorld extends World {
         // Butoane & Titlu
         addObject(new Labels("Galaxy Impact", 65), getWidth() / 2, 50);
         addObject(new Button("Play", 45), getWidth() / 2, getHeight() - 100);
-        addObject(new Button("Status: " + status + "/3", 45), getWidth() - 150, getHeight() - 100);
+        addObject(new Labels("Status: " + status + "/3", 45), getWidth() - 150, getHeight() - 100);
         addObject(new Button("Shop", 45), getWidth() - 750, getHeight() - 100);
         addObject(new Button("How to play", 45), getWidth() / 2, getHeight() - 40);
         
@@ -113,7 +114,7 @@ public class MyWorld extends World {
         game_over_sound = new GreenfootSound("game-over.mp3");
         game_sound = new GreenfootSound("game.mp3");
         win_game = new GreenfootSound("win.mp3");
-    
+        click = new GreenfootSound("click.mp3");
     }
     
     // Status joc
@@ -135,9 +136,10 @@ public class MyWorld extends World {
             } 
             if (gameStarted && !gameOver) {
                 // Finalizare joc cu status de castigator
-                if (ctn_enemy >= max_enemy && myInfo.getInt(4) != 2) {
+                
+                if (ctn_enemy >= max_enemy && myInfo.getInt(4) < 3) {
                     
-                    // Salvare status
+                    // Salvare status 
                     int ante_status = myInfo.getInt(4);
                     ante_status++;
                     myInfo.setInt(4, ante_status);
@@ -147,9 +149,9 @@ public class MyWorld extends World {
                     win = true;
                     
                     
-                } else if (ctn_enemy >= max_enemy && myInfo.getInt(4) == 2) {
+                } else if (ctn_enemy >= max_enemy) {
                     
-                    int ante_status = myInfo.getInt(4);
+                    int ante_status = myInfo.getInt(4) - 1;
                     get_score += 3 * ante_status * 5000;
                     gameOver = true;
                     win = true;
@@ -228,7 +230,7 @@ public class MyWorld extends World {
     // Functionalitati butoane
     private void handleButtonClick(Button button) {
         if (button.getLabel().equals("Play")) {
-            
+            click.play();
             if (myInfo.getInt(6) != 0 || myInfo.getInt(4) != 0) {
                 gameStarted = true;
                 // Stergere elemente
@@ -267,7 +269,7 @@ public class MyWorld extends World {
             
             // Codul pentru magazin
             removeObject(button);
-            
+            click.play();
             List<Button> buttons = getObjects(Button.class);
             for (Button b : buttons) {
                 removeObject(b);
@@ -286,6 +288,7 @@ public class MyWorld extends World {
         } else if (button.getLabel().equals("Mute music")) {
             
             // Oprire muzica
+            click.play();
             removeObject(button);
             addObject(new Button("Unmute music", 40), 775, 55);
             myInfo.setInt(3, 1);
@@ -294,12 +297,14 @@ public class MyWorld extends World {
             
         } else if (button.getLabel().equals("How to play")) {
             
+            click.play();
             game_sound.stop();
             Greenfoot.setWorld(new Keys());
             
         }else if (button.getLabel().equals("Unmute music")) {
             
             // Pornire muzica
+            click.play();
             removeObject(button);
             addObject(new Button("Mute music", 40), 775, 55);
             myInfo.setInt(3, 0);
@@ -309,6 +314,7 @@ public class MyWorld extends World {
         } else if (button.getLabel().equals("Buy Navy1")) {
             
             // Codul pentru a cumpara nava 1 din magazin
+            click.play();
             caracter_navy_index1 = myInfo.getInt(1);
             List<Points> points = getObjects(Points.class);
             
@@ -337,6 +343,7 @@ public class MyWorld extends World {
         } else if (button.getLabel().equals("Buy Navy2")) {
             
             // Codul pentru a cumpara nava 2 din magazin
+            click.play();
             caracter_navy_index2 = myInfo.getInt(2);
             List<Points> points = getObjects(Points.class);
             
@@ -365,6 +372,7 @@ public class MyWorld extends World {
         }  else if (button.getLabel().equals("Select Navy1")) {
             
             // Codul pentru a selecta nava 1 & salvare in baza de date 
+            click.play();
             caracter_navy = "navy1";
             removeObject(button);
             List<Button> buttons = getObjects(Button.class);
@@ -400,6 +408,7 @@ public class MyWorld extends World {
         } else if (button.getLabel().equals("Select Navy2")) {
                 
             // Selectare nava 2 & salvare in baza de date
+            click.play();
             caracter_navy = "navy2";
             removeObject(button);
             List<Button> buttons = getObjects(Button.class);
@@ -433,11 +442,13 @@ public class MyWorld extends World {
             myInfo.store();
                 
         } else if (button.getLabel().equals("Main Menu")) {
+            click.play();
             // Instanta pentru meniu
             goBackToMainMenu();
         } else if (button.getLabel().equals("Buy Navy3")) {
             
             // Codul pentru a cumpara nava 3 din magazin
+            click.play();
             caracter_navy_index2 = myInfo.getInt(2);
             List<Points> points = getObjects(Points.class);
             
@@ -465,6 +476,7 @@ public class MyWorld extends World {
         } else if (button.getLabel().equals("Select Navy3")) {
                 
             // Selectare nava 3 & salvare in baza de date
+            click.play();
             caracter_navy = "navy3";
             removeObject(button);
             

@@ -16,13 +16,19 @@ public class MainEnemy extends Actor {
     
     public MainEnemy() {
         // Afisare in functie de tipul inamicului
-        GreenfootImage enemyImage = new GreenfootImage("main-enemy.png");;
-        if (myInfo.getInt(4) == 1) {
+        GreenfootImage enemyImage = new GreenfootImage("main-enemy.png");
+        if (myInfo.getInt(4) == 0) {
+            
+            enemyImage = new GreenfootImage("main-enemy.png");;
+            
+        }
+        
+        else if (myInfo.getInt(4) == 1) {
             
             enemyImage = new GreenfootImage("medium-enemy.png");
             bulletSpawnDelay = 55;
             
-        } else if (myInfo.getInt(4) == 2) {
+        } else {
             
             enemyImage = new GreenfootImage("hard-enemy.png");
             bulletSpawnDelay = 50;
@@ -38,12 +44,12 @@ public class MainEnemy extends Actor {
         // Mișcare în jos & instanta World
         MyWorld myworld = (MyWorld) getWorld();
         setLocation(getX(), getY() + ySpeed);
-        if (myInfo.getInt(4) == 2) {
+        if (myInfo.getInt(4) < 2) {
             
-            addBulletHard();
+            addBullet();
             
         } else {
-            addBullet();
+            addBulletHard();
         }
         // Verificare dacă a ajuns în partea de jos a ecranului
         // Verificare intalnire cu actorul principal & glont principal

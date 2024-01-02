@@ -7,20 +7,8 @@ public class Story2 extends World
     public Story2()
     {    
         super(900, 600, 1);
-        GreenfootImage backgroundImage = new GreenfootImage("main-menu.jpg");
-        if (myInfo.getInt(4) == 1) {
-            
-            backgroundImage = new GreenfootImage("lvl2.jpg");
-            
-        } else if (myInfo.getInt(4) == 2) {
-            
-            backgroundImage = new GreenfootImage("background.jpg");
-            
-        } else {
-            
-            backgroundImage = new GreenfootImage("main-menu.jpg");
-            
-        }
+        GreenfootImage backgroundImage = new GreenfootImage("background.jpg");
+
         // Elemente si afisare imagine
         addObject(new Labels("Story", 70), getWidth() / 2, 50);
         addObject(new Labels("Now Melvin has become invincible.\n He destroyed the enemies and now he is the king of the galaxy.\n Melvin is grateful for your help.", 30), getWidth() / 2, 150);

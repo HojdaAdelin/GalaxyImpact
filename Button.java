@@ -4,10 +4,13 @@ import java.util.List;
 public class Button extends Actor {
     // Customizări
     private String label;
+    public GreenfootSound hover;
     private int size;
     private boolean isHovered = false;
 
     public Button(String label, int size) {
+        hover = new GreenfootSound("hover.mp3");
+        hover.setVolume(40);
         this.label = label;
         this.size = size;
         updateImage();
@@ -29,6 +32,7 @@ public class Button extends Actor {
             List objects = myWorld.getObjectsAt(mouse.getX(), mouse.getY(), Button.class);
     
             for (Object object : objects) {
+                
                 if (object == this) {
                     return true;
                 }
@@ -45,6 +49,7 @@ public class Button extends Actor {
         
         if (checkHover()) {
             
+            hover.play();
             GreenfootImage hoverImage = new GreenfootImage(label, size, Color.LIGHT_GRAY, new Color(150, 150, 150, 0));
             setImage(hoverImage);
             
