@@ -3,6 +3,7 @@ import greenfoot.*;
 public class EnemyBullet extends MainEnemy
 { 
     // Codul pentru glont inamic
+    public GreenfootSound hit;
     private int xSpeed = 5;
     private boolean removed = false;
     UserInfo myInfo = UserInfo.getMyInfo();
@@ -23,6 +24,7 @@ public class EnemyBullet extends MainEnemy
             xSpeed = 8;
             
         }
+        hit = new GreenfootSound("coll.mp3");
         GreenfootImage bullet = new GreenfootImage("enemy_bullet.png");
         setImage(bullet);
         bullet.scale(50, 100);
@@ -42,6 +44,7 @@ public class EnemyBullet extends MainEnemy
             }
         } else if (isTouching(MainPlayer.class) && !isTouching(PlayerBullet.class)) {
             
+            hit.play();
             myworld.minHp();
             getWorld().removeObject(this);
             
