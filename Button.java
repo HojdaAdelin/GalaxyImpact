@@ -28,7 +28,7 @@ public class Button extends Actor {
     
         if (world != null && world instanceof MyWorld && mouse != null) {
             MyWorld myWorld = (MyWorld) world;
-            GreenfootImage normalImage = new GreenfootImage(label, size, Color.WHITE, new Color(150, 150, 150, 0));
+            GreenfootImage normalImage = new GreenfootImage(label, size, Color.BLUE, new Color(150, 150, 150, 0));
             List objects = myWorld.getObjectsAt(mouse.getX(), mouse.getY(), Button.class);
     
             for (Object object : objects) {
@@ -54,12 +54,12 @@ public class Button extends Actor {
                 
             }
             
-            GreenfootImage hoverImage = new GreenfootImage(label, size, Color.LIGHT_GRAY, new Color(150, 150, 150, 0));
+            GreenfootImage hoverImage = new GreenfootImage(label, size, new Color(190, 216, 230), new Color(150, 150, 150, 0));
             setImage(hoverImage);
             
         } else {
             
-            GreenfootImage normalImage = new GreenfootImage(label, size, Color.WHITE, new Color(150, 150, 150, 0));
+            GreenfootImage normalImage = new GreenfootImage(label, size, new Color(130, 216, 230), new Color(150, 150, 150, 0));
             setImage(normalImage);
             verify = true;
         }

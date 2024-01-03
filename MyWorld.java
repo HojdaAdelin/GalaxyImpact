@@ -93,7 +93,7 @@ public class MyWorld extends World {
         addObject(new Labels("Galaxy Impact", 65), getWidth() / 2, 50);
         addObject(new Button("Play", 45), getWidth() / 2, getHeight() - 100);
         addObject(new Labels("Status: " + status + "/3", 45), getWidth() - 150, getHeight() - 100);
-        addObject(new Button("Shop", 45), getWidth() - 750, getHeight() - 100);
+        addObject(new Button("Shop", 45), 150, getHeight() - 100);
         addObject(new Button("How to play", 45), getWidth() / 2, getHeight() - 40);
         
         // Setari muzica
@@ -107,9 +107,12 @@ public class MyWorld extends World {
             
         }
         // Punctele & declarare muzici 
-        addObject(new Points(myInfo.getScore()), 125, 60);
-        addObject(new Labels("Best score:" + Integer.toString(myInfo.getInt(9)), 35), 130, 95);
-        
+        Points points = new Points(myInfo.getScore());
+        addObject(points, 125, 30);
+        int x = points.getX();
+        int y = points.getY();
+        addObject(new Labels("Best score:" + Integer.toString(myInfo.getInt(9)), 35), x, y + 30);
+        addObject(new Button("Leaderboard", 40), x, y + 70);
         game_start_sound = new GreenfootSound("game-start.mp3");
         game_over_sound = new GreenfootSound("game-over.mp3");
         game_sound = new GreenfootSound("game.mp3");
