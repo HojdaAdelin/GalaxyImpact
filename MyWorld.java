@@ -99,11 +99,11 @@ public class MyWorld extends World {
         // Setari muzica
         if (myInfo.getInt(3) == 0) {
             
-            addObject(new Button("Mute music", 40), 775, 55);
+            addObject(new Button("Mute music", 40), getWidth() - 125, 55);
             
         } else {
             
-            addObject(new Button("Unmute music", 40), 775, 55);
+            addObject(new Button("Unmute music", 40), getWidth() - 125, 55);
             
         }
         // Punctele & declarare muzici 
@@ -293,7 +293,7 @@ public class MyWorld extends World {
             // Oprire muzica
             click.play();
             removeObject(button);
-            addObject(new Button("Unmute music", 40), 775, 55);
+            addObject(new Button("Unmute music", 40), getWidth() - 125, 55);
             myInfo.setInt(3, 1);
             myInfo.store();
             game_sound.setVolume(0);
@@ -309,7 +309,7 @@ public class MyWorld extends World {
             // Pornire muzica
             click.play();
             removeObject(button);
-            addObject(new Button("Mute music", 40), 775, 55);
+            addObject(new Button("Mute music", 40), getWidth() - 125, 55);
             myInfo.setInt(3, 0);
             myInfo.store();
             game_sound.setVolume(100);
@@ -513,6 +513,11 @@ public class MyWorld extends World {
             myInfo.setString(1, "navy3");
             myInfo.store();
                 
+        } else if (button.getLabel().equals("Leaderboard")) {
+            
+            game_sound.stop();
+            Greenfoot.setWorld(new Leaderboard());
+            
         }
         
     }
