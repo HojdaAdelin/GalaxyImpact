@@ -91,6 +91,7 @@ public class MyWorld extends World {
         
         // Butoane & Titlu
         addObject(new Labels("Galaxy Impact", 65), getWidth() / 2, 50);
+        addObject(new Labels(myInfo.getUserName(), 40), getWidth() / 2, 100);
         addObject(new Button("Play", 45), getWidth() / 2, getHeight() - 100);
         addObject(new Button("Leaderboard", 45), getWidth() - 150, getHeight() - 100);
         addObject(new Button("Shop", 45), 150, getHeight() - 100);
