@@ -113,7 +113,7 @@ public class MyWorld extends World {
         int x = points.getX();
         int y = points.getY();
         addObject(new Labels("Best score:" + Integer.toString(myInfo.getInt(9)), 35), x, y + 30);
-        addObject(new Labels("Status: " + status + "/3", 45), x, y + 70);
+        addObject(new Labels("Status: " + status + "/3", 35), x, y + 60);
         
         game_start_sound = new GreenfootSound("game-start.mp3");
         game_over_sound = new GreenfootSound("game-over.mp3");
