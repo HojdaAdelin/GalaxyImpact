@@ -54,6 +54,8 @@ public class MyWorld extends World {
     public MyWorld() {
         super(900, 600, 1);
         // Verificare date user
+        myInfo.setInt(3, 40);
+        myInfo.store();
         if (!myInfo.isStorageAvailable()) {
             
             Greenfoot.setWorld(new VerifyLogIn());
@@ -91,7 +93,8 @@ public class MyWorld extends World {
         
         // Butoane & Titlu
         addObject(new Labels("Galaxy Impact", 65), getWidth() / 2, 50);
-        addObject(new Labels(myInfo.getUserName(), 40), getWidth() / 2, 100);
+        Labels labels = new Labels(myInfo.getUserName(), 40);
+        addObject(labels, getWidth() / 2, 100);
         addObject(new Button("Play", 45), getWidth() / 2, getHeight() - 100);
         addObject(new Button("Leaderboard", 45), getWidth() - 150, getHeight() - 40);
         addObject(new Button("Shop", 45), 150, getHeight() - 40);
@@ -121,6 +124,9 @@ public class MyWorld extends World {
         game_sound = new GreenfootSound("game.mp3");
         win_game = new GreenfootSound("win.mp3");
         click = new GreenfootSound("click.mp3");
+        
+        // Trofee
+        addObject(new Earn(), labels.getX() - 80, labels.getY());
     }
     
     // Status joc
