@@ -18,7 +18,6 @@ public class MainPlayer extends Actor {
         // Verificare nava in baza de date
         
         caracter_navy = myInfo.getString(1);
-        myInfo.setInt(3, 33);
         
         if ("navy1".equals(caracter_navy)) {
             

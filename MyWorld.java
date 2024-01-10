@@ -54,8 +54,7 @@ public class MyWorld extends World {
     public MyWorld() {
         super(900, 600, 1);
         // Verificare date user
-        myInfo.setInt(3, 40);
-        myInfo.store();
+        
         if (!myInfo.isStorageAvailable()) {
             
             Greenfoot.setWorld(new VerifyLogIn());
@@ -126,7 +125,7 @@ public class MyWorld extends World {
         click = new GreenfootSound("click.mp3");
         
         // Trofee
-        addObject(new Earn(), labels.getX() - 80, labels.getY());
+        addObject(new Earn(), labels.getX() - 100, labels.getY());
     }
     
     // Status joc
@@ -209,6 +208,20 @@ public class MyWorld extends World {
                 }
                 myInfo.setScore(score_from_text + get_score);
                 myInfo.store();
+                int get_trophie = myInfo.getInt(3);
+                if (get_trophie < 50) {
+                    
+                    get_trophie += 2;
+                    myInfo.setInt(3, get_trophie);
+                    myInfo.store();
+                    
+                } else {
+                    
+                    get_trophie++;
+                    myInfo.setInt(3, get_trophie);
+                    myInfo.store(); 
+                    
+                }
                 Greenfoot.setWorld(new WinInterface(get_score, status));
                 
             } else {
@@ -221,6 +234,26 @@ public class MyWorld extends World {
                 }
                 myInfo.setScore(score_from_text + get_score);
                 myInfo.store();
+                int get_trophie = myInfo.getInt(3);
+                if (get_trophie < 2) {
+                    
+                    myInfo.setInt(3, 0);
+                    myInfo.store();
+                    
+                }
+                else if (get_trophie < 50) {
+                    
+                    get_trophie -= 2;
+                    myInfo.setInt(3, get_trophie);
+                    myInfo.store();
+                    
+                } else {
+                    
+                    get_trophie -= 3;
+                    myInfo.setInt(3, get_trophie);
+                    myInfo.store(); 
+                    
+                }
                 Greenfoot.setWorld(new GameOver(get_score));
                 
             }
@@ -259,6 +292,10 @@ public class MyWorld extends World {
                 for (Button b : buttons) {
                     removeObject(b);
                 }
+                List<Earn> trophie = getObjects(Earn.class);
+                    for (Earn p : trophie) {
+                        removeObject(p);
+                }
                 // Incepere meci
                 game_start_sound.play();
                 addObject(new MainPlayer(), getWidth() / 2, getHeight() - 100);
@@ -294,7 +331,10 @@ public class MyWorld extends World {
                 for (Points p : points) {
                     removeObject(p);
             }
-            
+            List<Earn> trophie = getObjects(Earn.class);
+                for (Earn p : trophie) {
+                    removeObject(p);
+            }
             Shop();
             
         } else if (button.getLabel().equals("Mute music")) {

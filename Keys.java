@@ -24,7 +24,7 @@ public class Keys extends World
         }
         // Elemente si afisare imagine
         addObject(new Labels("KeyBinds", 70), getWidth() / 2, 50);
-        addObject(new Labels("W - move forward\nA - move left\nS - move backward\nD - move right\nSPACE - shoot", 30), getWidth() / 2, 180);
+        addObject(new Labels("W - move forward\nA - move left\nS - move backward\nD - move right\nSPACE - shoot\n\n\n\nIn the front of your name you will see a silver & gold dot.\nThis is the trophie count.\nFor each win you earn 2 trophie & -2 for lose(in silver).\nFor each win you earn 1 trophie & -3 for lose(in gold).", 30), getWidth() / 2, 280);
         backgroundImage.scale(getWidth(), getHeight());
         setBackground(backgroundImage);
         
