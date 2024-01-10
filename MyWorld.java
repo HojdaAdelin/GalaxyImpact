@@ -92,23 +92,22 @@ public class MyWorld extends World {
         // Butoane & Titlu
         addObject(new Labels("Galaxy Impact", 65), getWidth() / 2, 50);
         addObject(new Labels(myInfo.getUserName(), 40), getWidth() / 2, 100);
-        addObject(new Button("Solo", 45), getWidth() / 2, getHeight() - 100);
-        addObject(new Button("1 vs 1", 45), getWidth() / 2 - 150, getHeight() - 100);
-        addObject(new Button("Double", 45), getWidth() / 2 + 150, getHeight() - 100);
+        addObject(new Button("Play", 45), getWidth() / 2, getHeight() - 100);
         addObject(new Button("Leaderboard", 45), getWidth() - 150, getHeight() - 40);
         addObject(new Button("Shop", 45), 150, getHeight() - 40);
         addObject(new Button("How to play", 45), getWidth() / 2, getHeight() - 40);
         
         // Setari muzica
-        if (myInfo.getInt(3) == 0) {
-            
-            addObject(new Button("Mute music", 40), getWidth() - 125, 55);
-            
-        } else {
+        if ("mute".equals(myInfo.getString(3))) {
             
             addObject(new Button("Unmute music", 40), getWidth() - 125, 55);
             
+        } else {
+            
+            addObject(new Button("Mute music", 40), getWidth() - 125, 55);
+            
         }
+        
         // Punctele & declarare muzici 
         Points points = new Points(myInfo.getScore());
         addObject(points, 125, 30);
@@ -131,7 +130,7 @@ public class MyWorld extends World {
         if (!gameOver) {
             
             // Verificare status muzica
-            if (myInfo.getInt(3) == 0) {
+            if (!"mute".equals(myInfo.getString(3))) {
                 game_sound.play();
             }
             if (Greenfoot.mouseClicked(null) && !gameOver) {
@@ -236,7 +235,7 @@ public class MyWorld extends World {
     
     // Functionalitati butoane
     private void handleButtonClick(Button button) {
-        if (button.getLabel().equals("Solo")) {
+        if (button.getLabel().equals("Play")) {
             click.play();
             if (myInfo.getInt(6) != 0 || myInfo.getInt(4) != 0) {
                 gameStarted = true;
@@ -265,7 +264,7 @@ public class MyWorld extends World {
                 myInfo.setInt(6, 1);
                 myInfo.store();
                 Greenfoot.setWorld(new Story1());
-                if (myInfo.getInt(3) == 0) {
+                if (!"mute".equals(myInfo.getString(3))) {
                     
                     game_sound.stop();
                     
@@ -298,7 +297,7 @@ public class MyWorld extends World {
             click.play();
             removeObject(button);
             addObject(new Button("Unmute music", 40), getWidth() - 125, 55);
-            myInfo.setInt(3, 1);
+            myInfo.setString(3, "mute");
             myInfo.store();
             game_sound.setVolume(0);
             
@@ -314,7 +313,7 @@ public class MyWorld extends World {
             click.play();
             removeObject(button);
             addObject(new Button("Mute music", 40), getWidth() - 125, 55);
-            myInfo.setInt(3, 0);
+            myInfo.setString(3, " ");
             myInfo.store();
             game_sound.setVolume(100);
             

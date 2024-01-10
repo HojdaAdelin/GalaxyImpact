@@ -58,6 +58,7 @@ public class MainPlayer extends Actor {
         
         // Miscarea actorului
         
+            
         if (Greenfoot.isKeyDown("A")) {
             move(-speed); 
         }
@@ -70,6 +71,7 @@ public class MainPlayer extends Actor {
         if (Greenfoot.isKeyDown("S")) {
             setLocation(getX(), getY() + speed); 
         }
+        
         checkKeyPress();
     }
     private void checkKeyPress()
