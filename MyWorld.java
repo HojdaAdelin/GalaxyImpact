@@ -94,7 +94,8 @@ public class MyWorld extends World {
         addObject(new Labels("Galaxy Impact", 65), getWidth() / 2, 50);
         Labels labels = new Labels(myInfo.getUserName(), 40);
         addObject(labels, getWidth() / 2, 100);
-        addObject(new Button("Play", 45), getWidth() / 2, getHeight() - 100);
+        addObject(new Button("Play", 45), getWidth() / 2 - 100, getHeight() - 100);
+        addObject(new Button("1 vs 1", 45), getWidth() / 2 + 100, getHeight() - 100);
         addObject(new Button("Leaderboard", 45), getWidth() - 150, getHeight() - 40);
         addObject(new Button("Shop", 45), 150, getHeight() - 40);
         addObject(new Button("How to play", 45), getWidth() / 2, getHeight() - 40);
@@ -568,8 +569,13 @@ public class MyWorld extends World {
             click.play();
             Greenfoot.setWorld(new Leaderboard());
             
+        } else if (button.getLabel().equals("1 vs 1")) {
+            
+            game_sound.stop();
+            click.play();
+            Greenfoot.setWorld(new vss());
+            
         }
-        
     }
 
     private void addNewEnemyWithTimer() {

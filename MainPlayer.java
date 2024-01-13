@@ -126,14 +126,14 @@ public class MainPlayer extends Actor {
     // Afisare glont
     private void fireBullet()
     {
-        PlayerBullet bullet = new PlayerBullet();
+        PlayerBullet bullet = new PlayerBullet(1);
         getWorld().addObject(bullet, getX(), getY() - 30); // Adaugă bullet-ul deasupra player-ului
     }
     // Utilitatea "double bullet"
     private void doublefireBullet()
     {
-        PlayerBullet bullet1 = new PlayerBullet();
-        PlayerBullet bullet2 = new PlayerBullet();
+        PlayerBullet bullet1 = new PlayerBullet(1);
+        PlayerBullet bullet2 = new PlayerBullet(1);
     
         getWorld().addObject(bullet1, getX(), getY() - 30);
         getWorld().addObject(bullet2, getX() + 10, getY() - 30);

@@ -35,6 +35,7 @@ public class EnemyBullet extends MainEnemy
     {   
         // Verificare intalnire cu actor principal & y = 0
         MyWorld myworld = (MyWorld) getWorld();
+        
         setLocation(getX(), getY() + xSpeed);
         if (getY() >= getWorld().getHeight() - 1) {
             if (!removed) {
