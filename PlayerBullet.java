@@ -18,6 +18,7 @@ public class PlayerBullet extends MainPlayer
     }
         
     public void act() {
+        
         if (mod == 1) {
             setLocation(getX(), getY() - xSpeed);
             if (getY() == 0) {
@@ -26,6 +27,7 @@ public class PlayerBullet extends MainPlayer
                     world.removeObject(this);
                 }
             }
+            
         } else {
             setLocation(getX(), getY() + xSpeed);
             World world = getWorld();
@@ -34,9 +36,9 @@ public class PlayerBullet extends MainPlayer
                     world.removeObject(this);
                 }
             }
+            
         }
     }
-
 
     
 }
