@@ -95,6 +95,8 @@ public class MyWorld extends World {
         Labels labels = new Labels(myInfo.getUserName(), 40);
         addObject(labels, getWidth() / 2, 100);
         addObject(new Button("Play", 45), getWidth() / 2, getHeight() - 100);
+        addObject(new Button("Reset", 45), getWidth() - 200, getHeight() - 100);
+        addObject(new Button("Hard mode", 45), 200, getHeight() - 100);
         addObject(new Button("Leaderboard", 45), getWidth() - 150, getHeight() - 40);
         addObject(new Button("Shop", 45), 150, getHeight() - 40);
         addObject(new Button("How to play", 45), getWidth() / 2, getHeight() - 40);
@@ -568,6 +570,26 @@ public class MyWorld extends World {
             click.play();
             Greenfoot.setWorld(new Leaderboard());
             
+        } else if (button.getLabel().equals("Reset")) {
+            
+            click.play();
+            List<Button> buttons = getObjects(Button.class);
+            for (Button b : buttons) {
+                
+                if (b.getLabel() == "Reset") {
+                    
+                    removeObject(b);
+                    
+                }
+                
+            }
+            addObject(new Button("Ok", 45), getWidth() - 200, getHeight() - 100);
+        } else if (button.getLabel().equals("Ok")) {
+            
+            click.play();
+            myInfo.setInt(4, 0);
+            myInfo.store();
+            Greenfoot.setWorld(new Fundal());
         }
     }
 
