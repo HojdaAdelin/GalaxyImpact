@@ -104,7 +104,7 @@ public class MyWorld extends World {
         addObject(labels, getWidth() / 2, 100);
         addObject(new Button("Play", 45), getWidth() / 2, getHeight() - 100);
         addObject(new Button("Reset", 45), getWidth() - 200, getHeight() - 100);
-        addObject(new Button("Hard mode", 45), 200, getHeight() - 100);
+        //addObject(new Button("Hard mode", 45), 200, getHeight() - 100);
         addObject(new Button("Leaderboard", 45), getWidth() - 150, getHeight() - 40);
         addObject(new Button("Shop", 45), 150, getHeight() - 40);
         addObject(new Button("How to play", 45), getWidth() / 2, getHeight() - 40);
