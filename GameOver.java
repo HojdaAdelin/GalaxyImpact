@@ -17,9 +17,17 @@ public class GameOver extends World
             
             backgroundImage = new GreenfootImage("lvl2.jpg");
             
-        } else{
+        } else if (myInfo.getInt(4) == 2) {
             
             backgroundImage = new GreenfootImage("background.jpg");
+            
+        } else if (myInfo.getInt(4) == 3) {
+            
+            backgroundImage = new GreenfootImage("lvl4.jpg");
+            
+        } else {
+            
+            backgroundImage = new GreenfootImage("lvl5.png");
             
         }
         // Elemente si afisare imagine

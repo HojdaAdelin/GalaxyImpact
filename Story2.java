@@ -7,7 +7,7 @@ public class Story2 extends World
     public Story2()
     {    
         super(900, 600, 1);
-        GreenfootImage backgroundImage = new GreenfootImage("background.jpg");
+        GreenfootImage backgroundImage = new GreenfootImage("lvl5.png");
 
         // Elemente si afisare imagine
         addObject(new Labels("Story", 70), getWidth() / 2, 50);

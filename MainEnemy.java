@@ -28,10 +28,22 @@ public class MainEnemy extends Actor {
             enemyImage = new GreenfootImage("medium-enemy.png");
             bulletSpawnDelay = 55;
             
-        } else {
+        } else if (myInfo.getInt(4) == 2) {
             
             enemyImage = new GreenfootImage("hard-enemy.png");
             bulletSpawnDelay = 50;
+            ySpeed = 1;
+            
+        } else if (myInfo.getInt(4) == 3) {
+            
+            enemyImage = new GreenfootImage("lvl4-enemy.png");
+            bulletSpawnDelay = 45;
+            ySpeed = 1;
+            
+        } else {
+            
+            enemyImage = new GreenfootImage("lvl4-enemy.png");
+            bulletSpawnDelay = 40;
             ySpeed = 1;
             
         }
@@ -92,15 +104,20 @@ public class MainEnemy extends Actor {
     }
     // Glont al inamicului
     public void addBullet() {
-        
         bulletSpawnTimer++;
         if (bulletSpawnTimer >= bulletSpawnDelay) {
-            
             EnemyBullet bullet = new EnemyBullet();
             getWorld().addObject(bullet, getX(), getY() + 30);
+            
+            if (myInfo.getInt(4) == 3) {
+                // Adaugă al doilea glonț la o distanță suplimentară
+                EnemyBullet secondBullet = new EnemyBullet();
+                getWorld().addObject(secondBullet, getX(), getY() + 60);
+            }
+            
             bulletSpawnTimer = 0;
         }
-        
     }
+
     
 }

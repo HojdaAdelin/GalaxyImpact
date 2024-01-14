@@ -20,9 +20,17 @@ public class WinInterface extends World
             
             backgroundImage = new GreenfootImage("lvl2.jpg");
             
-        } else{
+        } else if (status == 2) {
             
             backgroundImage = new GreenfootImage("background.jpg");
+            
+        } else if (status == 3) {
+            
+            backgroundImage = new GreenfootImage("lvl4.jpg");
+            
+        } else {
+            
+            backgroundImage = new GreenfootImage("lvl5.png");
             
         }
         // Elemente si afisare imagine
@@ -37,7 +45,7 @@ public class WinInterface extends World
     }
     public void act() {
         if (Greenfoot.mouseClicked(this)) {
-            if (myInfo.getInt(7) == 0 && myInfo.getInt(4) == 3) {
+            if (myInfo.getInt(7) == 0 && myInfo.getInt(4) == 5) {
                 
                 Greenfoot.setWorld(new Story2());
                 myInfo.setInt(7, 1);

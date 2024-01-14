@@ -21,9 +21,17 @@ public class Fundal extends MyWorld
             
             status = 2;
             
-        } else {
+        } else if (myInfo.getInt(4) == 2) {
             
             status = 3;
+            
+        } else if (myInfo.getInt(4) == 3) {
+            
+            status = 4;
+            
+        } else {
+            
+            status = 5;
             
         }
        
@@ -37,7 +45,15 @@ public class Fundal extends MyWorld
             
             backgroundImage = new GreenfootImage("background.jpg");
             
-        } else {
+        } else if (status == 4) {
+            
+            backgroundImage = new GreenfootImage("lvl4.jpg");
+            
+        } else if (status == 5) {
+            
+            backgroundImage = new GreenfootImage("lvl5.png");
+            
+        }else {
             
             backgroundImage = new GreenfootImage("main-menu.jpg");
             

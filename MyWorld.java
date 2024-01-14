@@ -71,9 +71,17 @@ public class MyWorld extends World {
             
             status = 2;
             
-        } else {
+        } else if (myInfo.getInt(4) == 2) {
             
             status = 3;
+            
+        } else if (myInfo.getInt(4) == 3) {
+            
+            status = 4;
+            
+        } else {
+            
+            status = 5;
             
         }
         
@@ -118,7 +126,7 @@ public class MyWorld extends World {
         int x = points.getX();
         int y = points.getY();
         addObject(new Labels("Best score:" + Integer.toString(myInfo.getInt(9)), 35), x, y + 30);
-        addObject(new Labels("Status: " + status + "/3", 35), x, y + 60);
+        addObject(new Labels("Status: " + status + "/5", 35), x, y + 60);
         
         game_start_sound = new GreenfootSound("game-start.mp3");
         game_over_sound = new GreenfootSound("game-over.mp3");
@@ -150,7 +158,7 @@ public class MyWorld extends World {
             if (gameStarted && !gameOver) {
                 // Finalizare joc cu status de castigator
                 
-                if (ctn_enemy >= max_enemy && myInfo.getInt(4) < 3) {
+                if (ctn_enemy >= max_enemy && myInfo.getInt(4) < 5) {
                     
                     // Salvare status 
                     int ante_status = myInfo.getInt(4);
@@ -599,7 +607,7 @@ public class MyWorld extends World {
         power_up_timer++;
         clear_power_up_timer++;
         // Dificultate
-        if (ctn_enemy >= 36) {
+        if (ctn_enemy >= 33) {
             
             enemySpawnDelay = 30;
             
