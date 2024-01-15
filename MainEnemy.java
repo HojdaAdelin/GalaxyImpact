@@ -113,7 +113,7 @@ public class MainEnemy extends Actor {
                 // Adaugă al doilea glonț la o distanță suplimentară
                 EnemyBullet secondBullet = new EnemyBullet();
                 getWorld().addObject(secondBullet, getX(), getY() + 60);
-            } else if (myInfo.getInt(4) == 4) {
+            } else if (myInfo.getInt(4) >= 4) {
                 
                 EnemyBullet secondBullet = new EnemyBullet();
                 EnemyBullet secondBullet1 = new EnemyBullet();
