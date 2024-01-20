@@ -135,7 +135,8 @@ public class MyWorld extends World {
         click = new GreenfootSound("click.mp3");
         
         // Trofee
-        addObject(new Earn(), labels.getX() - 100, labels.getY());
+        int x_pos = labels.getX();
+        addObject(new Earn(), x_pos, labels.getY() + 50);
     }
     
     // Status joc
