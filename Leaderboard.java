@@ -33,7 +33,7 @@ public class Leaderboard extends World
         // Elemente si afisare imagine
         addObject(new Labels("Leaderboard", 70), getWidth() / 2, 50);
         // Lista celor mai buni jucatori
-        
+        // Accesare baza de date pentru utilizatori
         for (Object obj : UserInfo.getTop(5)) {
             
             UserInfo user = (UserInfo)obj;

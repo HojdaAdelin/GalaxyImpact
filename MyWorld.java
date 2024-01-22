@@ -25,7 +25,7 @@ public class MyWorld extends World {
     public boolean check_mute = false;
     public boolean win = false;
     public GreenfootSound game_start_sound;
-     public GreenfootSound win_game;
+    public GreenfootSound win_game;
     public GreenfootSound game_over_sound;
     public GreenfootSound game_sound;
     public GreenfootSound click;
@@ -48,12 +48,12 @@ public class MyWorld extends World {
     public int ctn_enemy = 0;
     public int max_enemy = 46;
     
-    // Baza de date a jucatorului 
+    // Baza de date a jucatorilor
     UserInfo myInfo = UserInfo.getMyInfo();
     
     public MyWorld() {
         super(900, 600, 1);
-        // Verificare date user
+        // Verificare date utilizator
         
         if (!myInfo.isStorageAvailable()) {
             
@@ -85,7 +85,7 @@ public class MyWorld extends World {
             
         }
         
-        // Hp mai mare pentru nava 3
+        // Actualizare hp pentru nava 3
         if ("navy3".equals(myInfo.getString(1))) {
             max_hp = 150;
             get_hp = 150;
@@ -104,7 +104,6 @@ public class MyWorld extends World {
         addObject(labels, getWidth() / 2, 100);
         addObject(new Button("Play", 45), getWidth() / 2, getHeight() - 100);
         addObject(new Button("Reset", 45), getWidth() - 200, getHeight() - 100);
-        //addObject(new Button("Hard mode", 45), 200, getHeight() - 100);
         addObject(new Button("Leaderboard", 45), getWidth() - 150, getHeight() - 40);
         addObject(new Button("Shop", 45), 150, getHeight() - 40);
         addObject(new Button("How to play", 45), getWidth() / 2, getHeight() - 40);
