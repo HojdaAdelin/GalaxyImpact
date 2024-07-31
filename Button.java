@@ -2,12 +2,14 @@ import greenfoot.*;
 import java.util.List;
 
 public class Button extends Actor {
-    // Customizări
+    // Variabile basics
     private String label;
-    public GreenfootSound hover;
+    private GreenfootSound hover;
     private int size;
     private boolean isHovered = false;
-
+    private boolean verify = true;
+    
+    
     public Button(String label, int size) {
         hover = new GreenfootSound("hover.mp3");
         hover.setVolume(40);
@@ -25,50 +27,68 @@ public class Button extends Actor {
     private boolean checkHover() {
         World world = getWorld();
         MouseInfo mouse = Greenfoot.getMouseInfo();
-    
-        if (world != null && world instanceof MyWorld && mouse != null) {
-            MyWorld myWorld = (MyWorld) world;
-            GreenfootImage normalImage = new GreenfootImage(label, size, Color.BLUE, new Color(150, 150, 150, 0));
-            List objects = myWorld.getObjectsAt(mouse.getX(), mouse.getY(), Button.class);
-    
-            for (Object object : objects) {
-                
+
+        if (world != null && mouse != null) {
+            List<Button> objects = world.getObjectsAt(mouse.getX(), mouse.getY(), Button.class);
+
+            for (Button object : objects) {
                 if (object == this) {
                     return true;
                 }
             }
         }
-        
+
         return false;
     }
 
-    boolean verify = true;
     private void updateImage() {
+        // Constructia dreptunghiului
+        int padding = 10;
+        int arcSize = 40; // Raza colțurilor rotunjite
+        int textWidth = (label.length() * size) / 2+5; // Estimare lățime text
+        int textHeight = size-14; // Înălțimea textului
+
+        int rectWidth = textWidth + padding * 2;
+        int rectHeight = textHeight + padding * 2;
+
+        GreenfootImage image = new GreenfootImage(rectWidth, rectHeight);
         
+        // Desenăm dreptunghiul cu colțuri rotunjite si verificam hover-ul
         if (checkHover()) {
-            
             if (verify) {
-                
                 hover.play();
                 verify = false;
-                
             }
-            
-            GreenfootImage hoverImage = new GreenfootImage(label, size, new Color(190, 216, 230), new Color(150, 150, 150, 0));
-            setImage(hoverImage);
-            
+            image.setColor(new Color(100, 149, 237)); // Cornflower Blue
         } else {
-            
-            GreenfootImage normalImage = new GreenfootImage(label, size, new Color(130, 216, 230), new Color(150, 150, 150, 0));
-            setImage(normalImage);
+            image.setColor(new Color(65, 105, 225)); // Royal Blue
             verify = true;
         }
-           
+
+
+        // Colțurile rotunjite
+        image.fillOval(0, 0, arcSize, arcSize); // stânga sus
+        image.fillOval(rectWidth - arcSize, 0, arcSize, arcSize); // dreapta sus
+        image.fillOval(0, rectHeight - arcSize, arcSize, arcSize); // stânga jos
+        image.fillOval(rectWidth - arcSize, rectHeight - arcSize, arcSize, arcSize); // dreapta jos
+
+        // Dreptunghiuri pentru a conecta colțurile
+        image.fillRect(arcSize / 2, 0, rectWidth - arcSize, rectHeight); // centru
+        image.fillRect(0, arcSize / 2, rectWidth, rectHeight - arcSize); // centru
+
+        // Desenăm textul
+        GreenfootImage textImage = new GreenfootImage(label, size, Color.WHITE, new Color(0, 0, 0, 0));
+        int textX = (rectWidth - textImage.getWidth()) / 2;
+        int textY = (rectHeight - textImage.getHeight()) / 2;
+        image.drawImage(textImage, textX, textY);
+
+        setImage(image);
     }
 
     // Actiunea butonului
     public void act() {
-        checkHover();
+        boolean hovered = checkHover();
+        isHovered = hovered;
         updateImage();
     }
 }

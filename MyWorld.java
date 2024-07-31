@@ -102,20 +102,20 @@ public class MyWorld extends World {
         addObject(new Labels("Galaxy Impact", 65), getWidth() / 2, 50);
         Labels labels = new Labels(myInfo.getUserName(), 40);
         addObject(labels, getWidth() / 2, 100);
-        addObject(new Button("Play", 45), getWidth() / 2, getHeight() - 100);
-        addObject(new Button("Reset", 45), getWidth() - 200, getHeight() - 100);
-        addObject(new Button("Leaderboard", 45), getWidth() - 150, getHeight() - 40);
-        addObject(new Button("Shop", 45), 150, getHeight() - 40);
-        addObject(new Button("How to play", 45), getWidth() / 2, getHeight() - 40);
+        addObject(new Button("Play", 40), getWidth() / 2, getHeight() - 100);
+        addObject(new Button("Reset", 40), getWidth() - 200, getHeight() - 100);
+        addObject(new Button("Leaderboard", 40), getWidth() - 150, getHeight() - 40);
+        addObject(new Button("Shop", 40), 150, getHeight() - 40);
+        addObject(new Button("How to play", 40), getWidth() / 2, getHeight() - 40);
         
         // Setari muzica
         if ("mute".equals(myInfo.getString(3))) {
             
-            addObject(new Button("Unmute music", 40), getWidth() - 125, 55);
+            addObject(new Button("Unmute music", 34), getWidth() - 140, 55);
             
         } else {
             
-            addObject(new Button("Mute music", 40), getWidth() - 125, 55);
+            addObject(new Button("Mute music", 34), getWidth() - 140, 55);
             
         }
         
@@ -352,7 +352,7 @@ public class MyWorld extends World {
             // Oprire muzica
             click.play();
             removeObject(button);
-            addObject(new Button("Unmute music", 40), getWidth() - 125, 55);
+            addObject(new Button("Unmute music", 34), getWidth() - 140, 55);
             myInfo.setString(3, "mute");
             myInfo.store();
             game_sound.setVolume(0);
@@ -368,7 +368,7 @@ public class MyWorld extends World {
             // Pornire muzica
             click.play();
             removeObject(button);
-            addObject(new Button("Mute music", 40), getWidth() - 125, 55);
+            addObject(new Button("Mute music", 34), getWidth() - 140, 55);
             myInfo.setString(3, " ");
             myInfo.store();
             game_sound.setVolume(100);
